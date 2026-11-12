@@ -8,13 +8,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-line bg-cream">
       <Container className="relative flex h-17 items-center justify-between md:h-[69px] lg:grid lg:grid-cols-[1fr_auto_1fr]">
         <a href="#top" className="justify-self-start rounded-sm">
-          <Image
-            src="/logo.svg"
-            alt="Luma home"
-            width={54}
-            height={17}
-            preload
-          />
+          <Image src="/logo.svg" alt="Luma home" width={54} height={17} />
         </a>
 
         <nav aria-label="Main" className="hidden md:block">

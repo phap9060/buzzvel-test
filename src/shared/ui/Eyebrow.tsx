@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/shared/lib/cn";
 
-type EyebrowTone = "brand" | "inverse" | "muted";
+type EyebrowTone = "brand" | "inverse";
 
 type EyebrowProps = {
   children: ReactNode;
@@ -12,7 +12,6 @@ type EyebrowProps = {
 const toneClasses: Record<EyebrowTone, string> = {
   brand: "text-brand",
   inverse: "text-white",
-  muted: "text-ink-tertiary",
 };
 
 /** Small uppercase label that sits above headings ("Desktop/Overline"). */

@@ -57,6 +57,7 @@ export function Hero() {
               alt={image.alt}
               fill
               preload
+              fetchPriority="high"
               sizes="(min-width: 80rem) 500px, (min-width: 64rem) 44vw, (min-width: 36rem) 500px, 92vw"
               className="rounded-3xl bg-brand-soft object-cover"
             />

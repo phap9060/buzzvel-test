@@ -45,7 +45,7 @@ export function Contact() {
                       {channel.value}
                     </a>
                   ) : (
-                    <span className="text-ink-tertiary">{channel.value}</span>
+                    <span className="text-ink-secondary">{channel.value}</span>
                   )}
                 </p>
               </li>

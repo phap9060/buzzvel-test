@@ -32,7 +32,7 @@ export function HowItWorks() {
                 className="relative pb-19 last:pb-0 md:flex-1 md:pb-0"
               >
                 <StepIcon variant={step.icon} />
-                <p className="mt-6 text-overline text-ink-tertiary">
+                <p className="mt-6 text-overline text-ink-secondary">
                   {howItWorksContent.stepLabel}{" "}
                   {String(index + 1).padStart(2, "0")}
                 </p>
