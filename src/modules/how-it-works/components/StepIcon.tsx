@@ -11,7 +11,10 @@ type StepIconProps = {
 export function StepIcon({ variant }: StepIconProps) {
   if (variant === "focus") {
     return (
-      <div aria-hidden="true" className="relative size-14 rounded-full bg-brand-soft">
+      <div
+        aria-hidden="true"
+        className="relative size-14 rounded-full bg-brand-soft"
+      >
         <div className="absolute top-2 left-2 size-6 rounded-md bg-brand" />
       </div>
     );

@@ -9,4 +9,7 @@ export const primaryNav: readonly NavLink[] = [
 ];
 
 export const loginLink: NavLink = { label: "Log in", href: "#contact" };
-export const signupLink: NavLink = { label: "Start learning", href: "#courses" };
+export const signupLink: NavLink = {
+  label: "Start learning",
+  href: "#courses",
+};
