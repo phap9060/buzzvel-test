@@ -8,7 +8,6 @@ type CommonProps = {
   children: ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  /** Stretches to the container width (mobile call-to-actions). */
   fullWidth?: boolean;
   className?: string;
 };
@@ -34,10 +33,6 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: "px-7 py-3.5",
 };
 
-/**
- * Call-to-action. Renders an anchor when `href` is given and a native button
- * otherwise, so navigation and actions keep the right semantics.
- */
 export function Button(props: ButtonProps) {
   const {
     children,

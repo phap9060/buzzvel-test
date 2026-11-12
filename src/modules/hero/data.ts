@@ -16,7 +16,6 @@ export const heroContent = {
   rating: { value: 4.9, max: 5, label: "avg rating" },
 } as const;
 
-// Decorative faces next to the "Trusted by" line, which carries the meaning.
 export const learnerAvatars: readonly Avatar[] = [
   { src: "/images/avatars/learner-1.jpg", alt: "" },
   { src: "/images/avatars/learner-2.jpg", alt: "" },

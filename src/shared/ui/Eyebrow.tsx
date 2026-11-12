@@ -14,7 +14,6 @@ const toneClasses: Record<EyebrowTone, string> = {
   inverse: "text-white",
 };
 
-/** Small uppercase label that sits above headings ("Desktop/Overline"). */
 export function Eyebrow({ children, tone = "brand", className }: EyebrowProps) {
   return (
     <p className={cn("text-overline uppercase", toneClasses[tone], className)}>

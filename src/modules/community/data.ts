@@ -3,7 +3,6 @@ import type { MosaicColumn } from "./types";
 export const communityContent = {
   eyebrow: "The people",
   title: "Meet international students & teachers",
-  // Placeholder copy kept exactly as it appears in the design.
   description:
     "Morbi sit egestas dignissim pharetra, sed amet. Tempus justo senectus risus ac vel, velit, nunc. Eget commodo eget in aliquam facilisi facilisi nec magna hendrerit. Placerat ipsum sit tellus urna, faucibus aenean lorem faucibus integer.",
   action: { label: "Explore teachers and students", href: "#contact" },
@@ -11,7 +10,6 @@ export const communityContent = {
 
 const photo = (file: string) => `/images/people/${file}.jpg`;
 
-/** Photo slots measured on both frames; the component scales them. */
 export const mosaicColumns: readonly MosaicColumn[] = [
   {
     id: "first",

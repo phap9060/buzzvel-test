@@ -6,10 +6,6 @@ type ContainerProps = {
   className?: string;
 };
 
-/**
- * Horizontal page gutter: 20px on mobile, 40px on tablet and the 80px of the
- * 1280px desktop frame. Content never grows past the 1120px design column.
- */
 export function Container({ children, className }: ContainerProps) {
   return (
     <div

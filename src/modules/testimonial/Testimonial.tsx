@@ -38,8 +38,6 @@ export function Testimonial() {
           </figcaption>
         </figure>
 
-        {/* flex-col-reverse keeps the number visually first while the label
-            (dt) still precedes its value (dd) in the markup. */}
         <dl className="grid grid-cols-3 gap-x-4 lg:w-[401px] lg:shrink-0 lg:grid-cols-1 lg:gap-[17px] lg:border-l lg:border-line lg:pl-12">
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col-reverse justify-end">

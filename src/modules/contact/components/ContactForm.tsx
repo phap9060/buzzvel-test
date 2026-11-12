@@ -35,7 +35,6 @@ export function ContactForm({
 
   const updateField = (name: ContactFieldName) => (value: string) => {
     setValues((current) => ({ ...current, [name]: value }));
-    // Clear the error as soon as the person starts fixing the field.
     setErrors((current) => ({ ...current, [name]: undefined }));
     if (status === "success") setStatus("idle");
   };
@@ -49,7 +48,6 @@ export function ContactForm({
 
     const firstInvalid = FIELD_ORDER.find((name) => nextErrors[name]);
     if (firstInvalid) {
-      // Field `name` attributes match the keys of the form values.
       const field = event.currentTarget.elements.namedItem(firstInvalid);
       if (field instanceof HTMLElement) field.focus();
       return;
@@ -62,7 +60,6 @@ export function ContactForm({
   };
 
   return (
-    // Validation is handled in code so messages are consistent and announced.
     <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6">
       <div className="flex flex-col gap-5">
         <FormField
@@ -102,7 +99,6 @@ export function ContactForm({
         {status === "submitting" ? submittingLabel : submitLabel}
       </Button>
 
-      {/* Always mounted so screen readers announce the message when it appears. */}
       <p role="status" className="text-body font-bold text-ink empty:hidden">
         {status === "success" ? successMessage : ""}
       </p>

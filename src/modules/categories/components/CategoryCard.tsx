@@ -3,12 +3,10 @@ import type { Category } from "../types";
 
 type CategoryCardProps = {
   category: Category;
-  /** 1-based position, rendered as the "01" style badge. */
   position: number;
   linkLabel: string;
 };
 
-/** The whole card is one link, so it is a single, large tab stop. */
 export function CategoryCard({
   category,
   position,

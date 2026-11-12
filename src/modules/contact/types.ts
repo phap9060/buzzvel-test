@@ -2,7 +2,6 @@ export type ContactChannel = {
   id: string;
   label: string;
   value: string;
-  /** When set, the value is rendered as a link. */
   href?: string;
   icon: { src: string; size: number };
 };

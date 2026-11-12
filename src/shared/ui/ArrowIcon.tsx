@@ -11,7 +11,6 @@ const sources = {
   light: "/icons/arrow-right-light.svg",
 } as const;
 
-/** Decorative arrow that follows a link label. */
 export function ArrowIcon({ tone = "dark", className }: ArrowIconProps) {
   return (
     <Image

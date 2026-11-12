@@ -13,7 +13,6 @@ export function Hero() {
       className="overflow-x-clip bg-cream py-15 md:py-20 lg:py-25"
     >
       <Container className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-15">
-        {/* Text comes first in the DOM; on mobile the artwork is shown above it. */}
         <div className="order-2 lg:order-1 lg:min-w-0 lg:flex-1">
           <Eyebrow>{heroContent.eyebrow}</Eyebrow>
           <h1

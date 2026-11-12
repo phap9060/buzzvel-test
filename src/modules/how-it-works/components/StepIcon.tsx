@@ -4,10 +4,6 @@ type StepIconProps = {
   variant: StepIconVariant;
 };
 
-/**
- * The three step marks are plain geometric shapes in Figma (no exported
- * asset), so they are drawn with CSS inside a fixed 56px box.
- */
 export function StepIcon({ variant }: StepIconProps) {
   if (variant === "focus") {
     return (

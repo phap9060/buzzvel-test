@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { siteConfig } from "@/shared/config/site";
-import "@/theme/index.css";
+import "./globals.css";
 
-// Only the weights used by the design are loaded, self-hosted by next/font.
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],

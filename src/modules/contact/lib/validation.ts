@@ -7,7 +7,6 @@ import type {
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_MESSAGE_LENGTH = 10;
 
-/** Order in which fields appear, used to focus the first invalid one. */
 export const FIELD_ORDER: readonly ContactFieldName[] = [
   "name",
   "email",
@@ -20,7 +19,6 @@ export const EMPTY_VALUES: ContactFormValues = {
   message: "",
 };
 
-/** Returns an error message per invalid field; an empty object means valid. */
 export function validateContactForm(
   values: ContactFormValues,
 ): ContactFormErrors {

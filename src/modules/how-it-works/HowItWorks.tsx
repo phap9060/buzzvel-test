@@ -18,11 +18,6 @@ export function HowItWorks() {
           </h2>
         </div>
 
-        {/*
-         * Steps stack on mobile, joined by short vertical connectors, and sit
-         * in three columns from md up, joined by one horizontal rule that runs
-         * from the first mark to the last.
-         */}
         <div className="relative mt-10 [--step-gap:2rem] md:mt-20 lg:mt-27 lg:pb-7 lg:[--step-gap:5rem]">
           <div
             aria-hidden="true"

@@ -1,6 +1,5 @@
 import type { NavLink } from "./types";
 
-// The design is a single page, so navigation points at in-page sections.
 export const primaryNav: readonly NavLink[] = [
   { label: "Courses", href: "#courses" },
   { label: "For Teams", href: "#contact" },

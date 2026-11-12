@@ -9,7 +9,6 @@ export type Avatar = {
 type AvatarStackProps = {
   avatars: readonly Avatar[];
   size?: 32 | 40;
-  /** Border colour utility; should match the surface behind the stack. */
   ringClassName?: string;
   className?: string;
 };
@@ -19,7 +18,6 @@ const sizeClasses = {
   40: "size-10",
 } as const;
 
-/** Row of overlapping round avatars. */
 export function AvatarStack({
   avatars,
   size = 32,

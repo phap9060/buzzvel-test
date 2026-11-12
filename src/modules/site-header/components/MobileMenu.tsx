@@ -11,14 +11,8 @@ type MobileMenuProps = {
   signup: NavLink;
 };
 
-/** Matches the Tailwind `md` breakpoint where the inline navigation takes over. */
 const DESKTOP_QUERY = "(min-width: 48rem)";
 
-/**
- * Disclosure menu for small screens. The Figma file only shows the closed
- * state, so the open panel reuses the header surface and the desktop link
- * styles.
- */
 export function MobileMenu({ links, login, signup }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const panelId = useId();
@@ -34,7 +28,6 @@ export function MobileMenu({ links, login, signup }: MobileMenuProps) {
       }
     };
 
-    // Close when the viewport grows into the desktop layout.
     const desktop = window.matchMedia(DESKTOP_QUERY);
     const onBreakpoint = (event: MediaQueryListEvent) => {
       if (event.matches) setIsOpen(false);

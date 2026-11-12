@@ -3,11 +3,9 @@ import type { FooterGroup } from "./types";
 
 export const footerContent = {
   tagline: "Practical learning for curious people.",
-  // The design shows a fixed year, so it is kept as static content.
   copyright: `© 2026 ${siteConfig.legalName}`,
 } as const;
 
-// Single-page mock: links point at the closest matching section.
 export const footerGroups: readonly FooterGroup[] = [
   {
     id: "explore",

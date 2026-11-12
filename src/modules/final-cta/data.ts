@@ -7,7 +7,6 @@ export const finalCtaContent = {
   secondaryAction: { label: "Join Luma", href: "#contact" },
 } as const;
 
-// Decorative faces; the heading carries the meaning.
 export const communityAvatars: readonly Avatar[] = [
   { src: "/images/avatars/learner-1.jpg", alt: "" },
   { src: "/images/avatars/learner-2.jpg", alt: "" },

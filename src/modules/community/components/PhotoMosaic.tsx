@@ -8,7 +8,6 @@ type PhotoMosaicProps = {
   className?: string;
 };
 
-/** Measures of the collage in each Figma frame, in design pixels. */
 const FRAME = {
   mobile: { width: 362, gapX: 12, gapY: 8, circle: 330 },
   desktop: { width: 520, gapX: 16, gapY: 12.84, circle: 500 },
@@ -16,11 +15,9 @@ const FRAME = {
 
 type FrameName = keyof typeof FRAME;
 
-/** Converts a design pixel value into container-query width units. */
 const cqw = (px: number, frame: FrameName) =>
   `${((px / FRAME[frame].width) * 100).toFixed(3)}cqw`;
 
-/** Builds the `--name` (mobile) and `--name-lg` (desktop) custom properties. */
 const responsiveVars = (
   values: Record<string, { mobile: number; desktop: number }>,
 ) => {
@@ -32,12 +29,6 @@ const responsiveVars = (
   return vars as CSSProperties;
 };
 
-/**
- * Staggered photo collage. The wrapper is a size container and every measure
- * is a `cqw` custom property taken from the Figma frames, so the collage
- * scales as one piece at any width. The mobile composition is used below lg
- * and the desktop one from lg up.
- */
 export function PhotoMosaic({ columns, className }: PhotoMosaicProps) {
   return (
     <div className={cn("@container w-full max-w-[520px]", className)}>
