@@ -1,0 +1,1 @@
+export { FeaturedCourse } from "./FeaturedCourse";
