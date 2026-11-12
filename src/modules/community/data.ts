@@ -26,7 +26,7 @@ export const mosaicColumns: readonly MosaicColumn[] = [
       },
       {
         src: photo("person-02"),
-        alt: "Three colleagues gathered around a laptop",
+        alt: "Group of students gathered around a laptop",
         width: 138.03,
         height: 207.05,
       },
@@ -45,7 +45,7 @@ export const mosaicColumns: readonly MosaicColumn[] = [
       },
       {
         src: photo("person-04"),
-        alt: "Two musicians practising by a window",
+        alt: "Two singers rehearsing with a microphone by a window",
         width: 102.72,
         height: 172.54,
       },
@@ -76,7 +76,7 @@ export const mosaicColumns: readonly MosaicColumn[] = [
       },
       {
         src: photo("person-08"),
-        alt: "Teacher on a video call shown on a desktop monitor",
+        alt: "Student watching a teacher on a video call",
         width: 102.72,
         height: 154.08,
       },
