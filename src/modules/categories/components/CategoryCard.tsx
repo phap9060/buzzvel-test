@@ -26,12 +26,12 @@ export function CategoryCard({
         >
           {String(position).padStart(2, "0")}
         </span>
-        <h3 className="mt-6 text-h5 text-ink">{category.title}</h3>
+        <h3 className="mt-5.5 text-h5 text-ink">{category.title}</h3>
         <p className="mt-3 text-body text-ink-tertiary">
           {category.description}
         </p>
       </div>
-      <span className="mt-6 flex items-center gap-2 text-body font-bold text-ink">
+      <span className="mt-5 flex items-center gap-2 text-body font-bold text-ink">
         {linkLabel}
         <ArrowIcon className="transition-transform duration-200 group-hover:translate-x-1" />
       </span>

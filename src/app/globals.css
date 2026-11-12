@@ -96,7 +96,8 @@
 @utility text-stat {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 2.5rem;
+  /* shrinks below the 402px mobile frame so three stats still fit in a row */
+  font-size: clamp(2rem, 10vw, 2.5rem);
   line-height: 2.75rem;
   letter-spacing: -0.025em;
   @media (width >= 64rem) {

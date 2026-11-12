@@ -15,7 +15,7 @@ type FormFieldProps = {
 };
 
 const controlClasses =
-  "block w-full rounded-lg border bg-cream px-4 py-3 text-body text-ink placeholder:text-ink-tertiary transition-colors duration-200 focus:border-brand focus:outline-none focus-visible:outline-none focus:ring-2 focus:ring-brand/30";
+  "block w-full scroll-mt-28 rounded-lg border bg-cream px-4 py-[11px] text-body text-ink placeholder:text-ink-tertiary transition-colors duration-200 focus:border-brand focus:outline-none focus-visible:outline-none focus:ring-2 focus:ring-brand/30";
 
 /** Labelled text input or textarea with an inline, announced error message. */
 export function FormField({
@@ -55,7 +55,7 @@ export function FormField({
           {...shared}
 
           rows={4}
-          className={cn(shared.className, "h-30 resize-y py-3.5")}
+          className={cn(shared.className, "h-25 resize-y lg:h-30")}
         />
       ) : (
         <input {...shared} type={type} />

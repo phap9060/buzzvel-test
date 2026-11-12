@@ -25,7 +25,7 @@ export function Contact() {
             {contactChannels.map((channel) => (
               <li
                 key={channel.id}
-                className="flex items-center gap-4 rounded-xl bg-cream p-5"
+                className="flex items-center gap-4 rounded-xl bg-cream p-3.5 lg:p-5"
               >
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-soft">
                   <Image
@@ -55,7 +55,7 @@ export function Contact() {
 
         <section
           aria-labelledby={FORM_HEADING_ID}
-          className="rounded-2xl border border-line bg-white p-5 shadow-card lg:w-[540px] lg:max-w-[50%] lg:shrink-0 lg:p-10"
+          className="rounded-2xl border border-line bg-white p-[19px] shadow-card lg:w-[540px] lg:max-w-[50%] lg:shrink-0 lg:p-[39px]"
         >
           <h3 id={FORM_HEADING_ID} className="text-h5 text-ink">
             {form.title}
