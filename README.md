@@ -47,7 +47,7 @@ Rules I followed: modules never import from each other, only from `shared/`; con
 
 ## Key decisions
 
-- **Design tokens first.** The Figma colour variables and the `Desktop/*` and `Mobile/*` text styles are mapped to Tailwind theme tokens and type utilities in `globals.css`. Each type utility carries the mobile style and switches to the desktop one at `lg`, so components never repeat font sizes.
+- **Design tokens first, no hand-written CSS.** `globals.css` contains only the Tailwind v4 `@theme` block: the Figma colour variables, shadows and the `Mobile/*` and `Desktop/*` text styles as theme tokens (for example `text-h1` and `text-h1-lg`). Everything else is utility classes, including the site-wide defaults (focus ring, smooth scrolling, reduced motion), which sit on `<html>` and `<body>` in `layout.tsx`.
 - **Breakpoints.** The file has a 402px mobile frame and a 1280px desktop frame, and no tablet frame. Mobile layouts apply below `lg` (1024px) and desktop layouts from `lg` up. In between I made these choices: the header shows the full navigation from `md`, category cards go to two columns from `sm`, the steps go to three columns from `md`, and button pairs sit side by side from `sm`.
 - **Content width.** Content is capped at the 1120px column of the desktop frame and centred on wider screens; backgrounds stay full-bleed.
 - **Photo mosaic.** The collage is sized in container-query units (`cqw`) taken from the Figma measurements, so it scales as one piece at any width, with separate mobile and desktop measures because the two frames crop the photos differently.

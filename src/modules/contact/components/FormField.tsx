@@ -15,7 +15,7 @@ type FormFieldProps = {
 };
 
 const controlClasses =
-  "block w-full scroll-mt-28 rounded-lg border bg-cream px-4 py-[11px] text-body text-ink placeholder:text-ink-tertiary transition-colors duration-200 focus:border-brand focus:outline-none focus-visible:outline-none focus:ring-2 focus:ring-brand/30";
+  "block w-full scroll-mt-28 rounded-lg border bg-cream px-4 py-[11px] text-body text-ink placeholder:text-ink-tertiary transition-colors duration-200 focus:border-brand";
 
 /** Labelled text input or textarea with an inline, announced error message. */
 export function FormField({

@@ -93,7 +93,7 @@ export function MobileMenu({ links, login, signup }: MobileMenuProps) {
                   <a
                     href={link.href}
                     onClick={close}
-                    className="block py-3 text-subtitle-1 text-ink"
+                    className="block py-3 text-subtitle-1 lg:text-subtitle-1-lg text-ink"
                   >
                     {link.label}
                   </a>

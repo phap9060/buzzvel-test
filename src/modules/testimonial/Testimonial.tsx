@@ -16,7 +16,7 @@ export function Testimonial() {
 
         <figure className="lg:max-w-[600px] lg:flex-1">
           <Image src="/icons/quote.svg" alt="" width={24} height={22} />
-          <blockquote className="mt-4 text-quote text-ink">
+          <blockquote className="mt-4 font-display text-quote lg:text-quote-lg text-ink">
             <p>{quote}</p>
           </blockquote>
           <figcaption className="mt-8 flex items-center gap-4">
@@ -46,7 +46,9 @@ export function Testimonial() {
               <dt className="mt-1 max-w-[104px] text-body text-ink-tertiary lg:max-w-none">
                 {stat.label}
               </dt>
-              <dd className="text-stat text-brand">{stat.value}</dd>
+              <dd className="font-display text-stat lg:text-stat-lg text-brand">
+                {stat.value}
+              </dd>
             </div>
           ))}
         </dl>

@@ -20,7 +20,7 @@ export function SiteFooter() {
               <nav key={group.id} aria-labelledby={headingId}>
                 <h2
                   id={headingId}
-                  className="text-overline text-on-dark-secondary"
+                  className="text-overline uppercase text-on-dark-secondary"
                 >
                   {group.title}
                 </h2>
@@ -29,7 +29,7 @@ export function SiteFooter() {
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="rounded-sm text-body text-on-dark-tertiary transition-colors duration-200 hover:text-white focus-visible:outline-white"
+                        className="rounded-sm text-body text-on-dark-tertiary transition-colors duration-200 hover:text-white focus-visible:outline-white!"
                       >
                         {link.label}
                       </a>

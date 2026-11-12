@@ -20,20 +20,23 @@ export function FeaturedCourse() {
               className="object-cover"
             />
           </div>
-          <p className="absolute -top-3 -left-3 rounded-md bg-sun px-3 py-1.5 text-overline text-ink">
+          <p className="absolute -top-3 -left-3 rounded-md bg-sun px-3 py-1.5 text-overline uppercase text-ink">
             {featuredCourse.badge}
           </p>
         </div>
 
         <div className="lg:min-w-0 lg:flex-1">
           <Eyebrow tone="inverse">{featuredCourse.eyebrow}</Eyebrow>
-          <h2 id={HEADING_ID} className="mt-4 text-h3 text-white">
+          <h2
+            id={HEADING_ID}
+            className="mt-4 font-display text-h3 lg:text-h3-lg text-white"
+          >
             {featuredCourse.title}
           </h2>
-          <p className="mt-5 text-subtitle-2 text-white">
+          <p className="mt-5 text-subtitle-2 lg:text-subtitle-2-lg text-white">
             {featuredCourse.description}
           </p>
-          <p className="mt-6 text-subtitle-2 text-white">
+          <p className="mt-6 text-subtitle-2 lg:text-subtitle-2-lg text-white">
             {featuredCourse.instructor}
           </p>
 
@@ -54,7 +57,7 @@ export function FeaturedCourse() {
             </Button>
             <a
               href={secondaryAction.href}
-              className="group flex items-center justify-center gap-2 rounded-lg px-4 py-3.5 text-body font-bold text-white underline-offset-4 hover:underline focus-visible:outline-white"
+              className="group flex items-center justify-center gap-2 rounded-lg px-4 py-3.5 text-body font-bold text-white underline-offset-4 hover:underline focus-visible:outline-white!"
             >
               {secondaryAction.label}
               <ArrowIcon

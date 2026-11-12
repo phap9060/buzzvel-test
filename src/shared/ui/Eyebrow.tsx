@@ -17,7 +17,7 @@ const toneClasses: Record<EyebrowTone, string> = {
 /** Small uppercase label that sits above headings ("Desktop/Overline"). */
 export function Eyebrow({ children, tone = "brand", className }: EyebrowProps) {
   return (
-    <p className={cn("text-overline", toneClasses[tone], className)}>
+    <p className={cn("text-overline uppercase", toneClasses[tone], className)}>
       {children}
     </p>
   );

@@ -22,11 +22,13 @@ export function CategoryCard({
       <div>
         <span
           aria-hidden="true"
-          className="inline-block rounded-md bg-brand-soft px-2 py-1 text-overline text-brand"
+          className="inline-block rounded-md bg-brand-soft px-2 py-1 text-overline uppercase text-brand"
         >
           {String(position).padStart(2, "0")}
         </span>
-        <h3 className="mt-5.5 text-h5 text-ink">{category.title}</h3>
+        <h3 className="mt-5.5 font-display text-h5 lg:text-h5-lg text-ink">
+          {category.title}
+        </h3>
         <p className="mt-3 text-body text-ink-tertiary">
           {category.description}
         </p>

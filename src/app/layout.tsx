@@ -43,9 +43,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jakarta.variable} antialiased`}
+      // scroll-pt keeps anchored sections clear of the sticky header
+      className={`${inter.variable} ${jakarta.variable} scroll-pt-18 scroll-smooth antialiased motion-reduce:scroll-auto`}
     >
-      <body className="flex min-h-dvh flex-col">{children}</body>
+      {/* Site-wide defaults: surface, text, focus ring and reduced motion. */}
+      <body className="flex min-h-dvh flex-col bg-cream font-sans text-ink motion-reduce:**:transition-none! [&_:focus-visible]:outline-2 [&_:focus-visible]:outline-offset-2 [&_:focus-visible]:outline-brand">
+        {children}
+      </body>
     </html>
   );
 }

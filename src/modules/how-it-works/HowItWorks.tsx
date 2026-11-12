@@ -10,7 +10,10 @@ export function HowItWorks() {
       <Container>
         <div className="text-center">
           <Eyebrow>{howItWorksContent.eyebrow}</Eyebrow>
-          <h2 id={HEADING_ID} className="mt-4 text-h3 text-ink">
+          <h2
+            id={HEADING_ID}
+            className="mt-4 font-display text-h3 lg:text-h3-lg text-ink"
+          >
             {howItWorksContent.title}
           </h2>
         </div>
@@ -32,12 +35,14 @@ export function HowItWorks() {
                 className="relative pb-19 last:pb-0 md:flex-1 md:pb-0"
               >
                 <StepIcon variant={step.icon} />
-                <p className="mt-6 text-overline text-ink-secondary">
+                <p className="mt-6 text-overline uppercase text-ink-secondary">
                   {howItWorksContent.stepLabel}{" "}
                   {String(index + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-2 text-h5 text-ink">{step.title}</h3>
-                <p className="mt-3 text-subtitle-2 text-ink-secondary">
+                <h3 className="mt-2 font-display text-h5 lg:text-h5-lg text-ink">
+                  {step.title}
+                </h3>
+                <p className="mt-3 text-subtitle-2 lg:text-subtitle-2-lg text-ink-secondary">
                   {step.description}
                 </p>
                 {index < steps.length - 1 && (

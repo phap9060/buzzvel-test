@@ -19,10 +19,13 @@ export function FinalCta() {
           size={40}
           ringClassName="border-sun"
         />
-        <h2 id={HEADING_ID} className="mt-8 text-h2 text-ink">
+        <h2
+          id={HEADING_ID}
+          className="mt-8 font-display text-h2 lg:text-h2-lg text-ink"
+        >
           {finalCtaContent.title}
         </h2>
-        <p className="mt-4 text-subtitle-1 text-ink-secondary">
+        <p className="mt-4 text-subtitle-1 lg:text-subtitle-1-lg text-ink-secondary">
           {finalCtaContent.description}
         </p>
         <div className="mt-10 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">

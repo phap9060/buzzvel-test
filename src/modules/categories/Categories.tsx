@@ -10,10 +10,13 @@ export function Categories() {
       <Container>
         <div className="max-w-[560px]">
           <Eyebrow>{categoriesContent.eyebrow}</Eyebrow>
-          <h2 id={HEADING_ID} className="mt-4 text-h3 text-ink">
+          <h2
+            id={HEADING_ID}
+            className="mt-4 font-display text-h3 lg:text-h3-lg text-ink"
+          >
             {categoriesContent.title}
           </h2>
-          <p className="mt-4 text-subtitle-1 text-ink-secondary">
+          <p className="mt-4 text-subtitle-1 lg:text-subtitle-1-lg text-ink-secondary">
             {categoriesContent.description}
           </p>
         </div>

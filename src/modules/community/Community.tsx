@@ -12,10 +12,13 @@ export function Community() {
       <Container className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-15">
         <div className="lg:min-w-0 lg:flex-1">
           <Eyebrow>{communityContent.eyebrow}</Eyebrow>
-          <h2 id={HEADING_ID} className="mt-2 text-h3 text-ink">
+          <h2
+            id={HEADING_ID}
+            className="mt-2 font-display text-h3 lg:text-h3-lg text-ink"
+          >
             {communityContent.title}
           </h2>
-          <p className="mt-6 text-subtitle-1 text-ink-secondary lg:mt-8">
+          <p className="mt-6 text-subtitle-1 lg:text-subtitle-1-lg text-ink-secondary lg:mt-8">
             {communityContent.description}
           </p>
           <Button

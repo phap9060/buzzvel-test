@@ -16,10 +16,13 @@ export function Hero() {
         {/* Text comes first in the DOM; on mobile the artwork is shown above it. */}
         <div className="order-2 lg:order-1 lg:min-w-0 lg:flex-1">
           <Eyebrow>{heroContent.eyebrow}</Eyebrow>
-          <h1 id={HEADING_ID} className="mt-4 text-h1 text-ink">
+          <h1
+            id={HEADING_ID}
+            className="mt-4 font-display text-h1 lg:text-h1-lg text-ink"
+          >
             {heroContent.title}
           </h1>
-          <p className="mt-6 max-w-[480px] text-subtitle-1 text-ink-secondary">
+          <p className="mt-6 max-w-[480px] text-subtitle-1 lg:text-subtitle-1-lg text-ink-secondary">
             {heroContent.description}
           </p>
 

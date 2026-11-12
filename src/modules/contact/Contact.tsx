@@ -14,10 +14,13 @@ export function Contact() {
       <Container className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-15">
         <div className="lg:w-[480px] lg:max-w-[45%]">
           <Eyebrow>{contactContent.eyebrow}</Eyebrow>
-          <h2 id={HEADING_ID} className="mt-4 text-h3 text-ink">
+          <h2
+            id={HEADING_ID}
+            className="mt-4 font-display text-h3 lg:text-h3-lg text-ink"
+          >
             {contactContent.title}
           </h2>
-          <p className="mt-4 text-subtitle-1 text-ink-secondary">
+          <p className="mt-4 text-subtitle-1 lg:text-subtitle-1-lg text-ink-secondary">
             {contactContent.description}
           </p>
 
@@ -57,7 +60,10 @@ export function Contact() {
           aria-labelledby={FORM_HEADING_ID}
           className="rounded-2xl border border-line bg-white p-[19px] shadow-card lg:w-[540px] lg:max-w-[50%] lg:shrink-0 lg:p-[39px]"
         >
-          <h3 id={FORM_HEADING_ID} className="text-h5 text-ink">
+          <h3
+            id={FORM_HEADING_ID}
+            className="font-display text-h5 lg:text-h5-lg text-ink"
+          >
             {form.title}
           </h3>
           <p className="mt-2 mb-6 text-body text-ink-secondary">

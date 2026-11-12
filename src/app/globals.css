@@ -1,7 +1,11 @@
 @import "tailwindcss";
 
 /*
- * Design tokens, mapped 1:1 from the Figma variables.
+ * The whole theme lives in this @theme block, which is how Tailwind CSS v4 is
+ * configured (it replaces tailwind.config). There are no hand-written CSS
+ * rules: everything else is utility classes in the components.
+ *
+ * Colour tokens are mapped 1:1 from the Figma variables.
  * Figma name -> token:
  *   text-primary / background-darkblue -> ink
  *   text-secondary                     -> ink-secondary
@@ -40,144 +44,70 @@
   --shadow-badge: 0 4px 12px rgb(0 0 0 / 0.1);
   --shadow-card: 0 12px 16px rgb(23 27 44 / 0.04);
   --shadow-photo: 0 3px 5px rgb(0 0 0 / 0.1), 0 0 3px rgb(0 0 0 / 0.07);
-}
 
-/*
- * Type scale. Each utility carries the "Mobile/*" text style from Figma and
- * switches to the matching "Desktop/*" style at the lg breakpoint (64rem).
- */
-@utility text-h1 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 2.5rem;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  @media (width >= 64rem) {
-    /* 52px at 1024px wide, reaching the 64px of the 1280px design */
-    font-size: clamp(3.25rem, 5vw, 4rem);
-    line-height: 1.09375;
-  }
-}
+  /*
+   * Type scale: the "Mobile/*" text styles from Figma, plus an "-lg" variant
+   * with the matching "Desktop/*" style. Each token generates a text-* utility
+   * that sets size, line height, tracking and weight together.
+   */
+  --text-h1: 2.5rem;
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h1--font-weight: 800;
+  /* 52px at 1024px wide, reaching the 64px of the 1280px design */
+  --text-h1-lg: clamp(3.25rem, 5vw, 4rem);
+  --text-h1-lg--line-height: 1.09375;
 
-@utility text-h2 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-  letter-spacing: -0.025em;
-  @media (width >= 64rem) {
-    font-size: 3.5rem;
-    line-height: 4rem;
-  }
-}
+  --text-h2: 2.25rem;
+  --text-h2--line-height: 2.5rem;
+  --text-h2--letter-spacing: -0.025em;
+  --text-h2--font-weight: 800;
+  --text-h2-lg: 3.5rem;
+  --text-h2-lg--line-height: 4rem;
 
-@utility text-h3 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 2rem;
-  line-height: 2.25rem;
-  letter-spacing: -0.025em;
-  @media (width >= 64rem) {
-    font-size: 3rem;
-    line-height: 3.5rem;
-  }
-}
+  --text-h3: 2rem;
+  --text-h3--line-height: 2.25rem;
+  --text-h3--letter-spacing: -0.025em;
+  --text-h3--font-weight: 800;
+  --text-h3-lg: 3rem;
+  --text-h3-lg--line-height: 3.5rem;
 
-@utility text-h5 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  @media (width >= 64rem) {
-    line-height: 2rem;
-  }
-}
+  --text-h5: 1.25rem;
+  --text-h5--line-height: 1.75rem;
+  --text-h5--font-weight: 700;
+  --text-h5-lg: 1.25rem;
+  --text-h5-lg--line-height: 2rem;
 
-@utility text-stat {
-  font-family: var(--font-display);
-  font-weight: 800;
   /* shrinks below the 402px mobile frame so three stats still fit in a row */
-  font-size: clamp(2rem, 10vw, 2.5rem);
-  line-height: 2.75rem;
-  letter-spacing: -0.025em;
-  @media (width >= 64rem) {
-    font-size: 4rem;
-    line-height: 4.375rem;
-  }
-}
+  --text-stat: clamp(2rem, 10vw, 2.5rem);
+  --text-stat--line-height: 2.75rem;
+  --text-stat--letter-spacing: -0.025em;
+  --text-stat--font-weight: 800;
+  --text-stat-lg: 4rem;
+  --text-stat-lg--line-height: 4.375rem;
 
-@utility text-quote {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.25rem;
-  line-height: 2rem;
-  @media (width >= 64rem) {
-    font-size: 1.875rem;
-    line-height: 2.75rem;
-    letter-spacing: -0.025em;
-  }
-}
+  --text-quote: 1.25rem;
+  --text-quote--line-height: 2rem;
+  --text-quote--font-weight: 600;
+  --text-quote-lg: 1.875rem;
+  --text-quote-lg--line-height: 2.75rem;
+  --text-quote-lg--letter-spacing: -0.025em;
 
-@utility text-subtitle-1 {
-  font-size: 1rem;
-  line-height: 1.625rem;
-  @media (width >= 64rem) {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-}
+  --text-subtitle-1: 1rem;
+  --text-subtitle-1--line-height: 1.625rem;
+  --text-subtitle-1-lg: 1.125rem;
+  --text-subtitle-1-lg--line-height: 1.75rem;
 
-@utility text-subtitle-2 {
-  font-size: 0.875rem;
-  line-height: 1.5rem;
-  @media (width >= 64rem) {
-    font-size: 1rem;
-    line-height: 1.75rem;
-  }
-}
+  --text-subtitle-2: 0.875rem;
+  --text-subtitle-2--line-height: 1.5rem;
+  --text-subtitle-2-lg: 1rem;
+  --text-subtitle-2-lg--line-height: 1.75rem;
 
-@utility text-body {
-  font-size: 0.875rem;
-  line-height: 1.5rem;
-}
+  --text-body: 0.875rem;
+  --text-body--line-height: 1.5rem;
 
-@utility text-overline {
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    /* keeps anchored sections clear of the sticky header */
-    scroll-padding-top: 4.5rem;
-  }
-
-  body {
-    background-color: var(--color-cream);
-    color: var(--color-ink);
-    font-family: var(--font-sans);
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--color-brand);
-    outline-offset: 2px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
+  --text-overline: 0.75rem;
+  --text-overline--line-height: 1rem;
+  --text-overline--letter-spacing: 0.12em;
+  --text-overline--font-weight: 600;
 }
