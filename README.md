@@ -27,7 +27,7 @@ The page is split into self-contained modules, one per section of the design. `a
 ```
 src/
   app/                 layout (fonts, metadata) and page composition
-  theme/               Tailwind theme: colours, typography, effects, base defaults
+  theme/               design tokens in TypeScript: colours, typography, shadows, base defaults
   modules/
     site-header/       each module owns its section component,
     hero/              its sub-components, its typed local data
@@ -48,7 +48,7 @@ Rules I followed: modules never import from each other, only from `shared/`; con
 
 ## Key decisions
 
-- **Theme in one place, written with Tailwind.** `src/theme/` holds the Tailwind v4 theme, split by concern: `colors.css` (the Figma colour variables), `typography.css` (fonts and the `Mobile/*` and `Desktop/*` text styles as tokens such as `text-h1` and `text-h1-lg`), `effects.css` (shadows) and `base.css` (site-wide defaults — surface, focus ring, smooth scrolling, reduced motion — composed from Tailwind utilities with `@apply`). `index.css` ties them together and is imported once by the root layout. There are no hand-written style rules.
+- **Theme in TypeScript.** `src/theme/` holds the design system as typed modules: `colors.ts` (the Figma colour variables), `typography.ts` (fonts and the `Mobile/*` and `Desktop/*` text styles as tokens such as `text-h1` and `text-h1-lg`), `shadows.ts` and `base.ts` (site-wide defaults — surface, focus ring, smooth scrolling, reduced motion — registered as a Tailwind plugin and composed from utilities). `tailwind.config.ts` assembles them. The only stylesheet is the two-line `app/globals.css` that Tailwind v4 needs as its entry point (`@import "tailwindcss"` and `@config`).
 - **Breakpoints.** The file has a 402px mobile frame and a 1280px desktop frame, and no tablet frame. Mobile layouts apply below `lg` (1024px) and desktop layouts from `lg` up. In between I made these choices: the header shows the full navigation from `md`, category cards go to two columns from `sm`, the steps go to three columns from `md`, and button pairs sit side by side from `sm`.
 - **Content width.** Content is capped at the 1120px column of the desktop frame and centred on wider screens; backgrounds stay full-bleed.
 - **Photo mosaic.** The collage is sized in container-query units (`cqw`) taken from the Figma measurements, so it scales as one piece at any width, with separate mobile and desktop measures because the two frames crop the photos differently.
