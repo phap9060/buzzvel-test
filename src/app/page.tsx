@@ -1,3 +1,10 @@
+import { SiteHeader } from "@/modules/site-header";
+
 export default function Home() {
-  return <main id="main" />;
+  return (
+    <>
+      <SiteHeader />
+      <main id="top" />
+    </>
+  );
 }

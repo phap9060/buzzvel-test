@@ -24,9 +24,9 @@ type ButtonAsButton = CommonProps &
 export type ButtonProps = ButtonAsLink | ButtonAsButton;
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: "border-transparent bg-brand text-white hover:bg-brand-strong",
-  secondary: "border-line bg-white text-ink hover:border-ink-tertiary",
-  accent: "border-transparent bg-sun text-ink hover:bg-sun-soft",
+  primary: "bg-brand text-white hover:bg-brand-strong",
+  secondary: "border border-line bg-white text-ink hover:border-ink-tertiary",
+  accent: "bg-sun text-ink hover:bg-sun-soft",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -49,7 +49,7 @@ export function Button(props: ButtonProps) {
   } = props;
 
   const classes = cn(
-    "inline-flex items-center justify-center rounded-lg border text-center text-body font-bold whitespace-nowrap transition-colors duration-200",
+    "inline-flex items-center justify-center rounded-lg text-center text-body font-bold whitespace-nowrap transition-colors duration-200",
     "disabled:cursor-not-allowed disabled:opacity-70",
     variantClasses[variant],
     sizeClasses[size],
