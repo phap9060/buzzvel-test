@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { siteConfig } from "@/shared/config/site";
-import "./globals.css";
+import "@/theme/index.css";
 
 // Only the weights used by the design are loaded, self-hosted by next/font.
 const inter = Inter({
@@ -41,15 +41,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      // scroll-pt keeps anchored sections clear of the sticky header
-      className={`${inter.variable} ${jakarta.variable} scroll-pt-18 scroll-smooth antialiased motion-reduce:scroll-auto`}
-    >
-      {/* Site-wide defaults: surface, text, focus ring and reduced motion. */}
-      <body className="flex min-h-dvh flex-col bg-cream font-sans text-ink motion-reduce:**:transition-none! [&_:focus-visible]:outline-2 [&_:focus-visible]:outline-offset-2 [&_:focus-visible]:outline-brand">
-        {children}
-      </body>
+    <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
+      <body className="flex min-h-dvh flex-col">{children}</body>
     </html>
   );
 }

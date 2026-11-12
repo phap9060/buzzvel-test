@@ -29,7 +29,7 @@ export function SiteFooter() {
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="rounded-sm text-body text-on-dark-tertiary transition-colors duration-200 hover:text-white focus-visible:outline-white!"
+                        className="rounded-sm text-body text-on-dark-tertiary transition-colors duration-200 hover:text-white focus-visible:outline-white"
                       >
                         {link.label}
                       </a>

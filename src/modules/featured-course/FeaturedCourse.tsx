@@ -57,7 +57,7 @@ export function FeaturedCourse() {
             </Button>
             <a
               href={secondaryAction.href}
-              className="group flex items-center justify-center gap-2 rounded-lg px-4 py-3.5 text-body font-bold text-white underline-offset-4 hover:underline focus-visible:outline-white!"
+              className="group flex items-center justify-center gap-2 rounded-lg px-4 py-3.5 text-body font-bold text-white underline-offset-4 hover:underline focus-visible:outline-white"
             >
               {secondaryAction.label}
               <ArrowIcon

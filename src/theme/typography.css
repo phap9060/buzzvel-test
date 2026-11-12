@@ -1,55 +1,15 @@
-@import "tailwindcss";
-
 /*
- * The whole theme lives in this @theme block, which is how Tailwind CSS v4 is
- * configured (it replaces tailwind.config). There are no hand-written CSS
- * rules: everything else is utility classes in the components.
+ * Font families and the type scale.
  *
- * Colour tokens are mapped 1:1 from the Figma variables.
- * Figma name -> token:
- *   text-primary / background-darkblue -> ink
- *   text-secondary                     -> ink-secondary
- *   text-tertiary                      -> ink-tertiary
- *   text-white-secondary / -tertiary   -> on-dark-secondary / on-dark-tertiary
- *   primary-blue / primary-blue-light  -> brand / brand-soft
- *   backgrounnd-light-yellow           -> cream
- *   backgrounnd-yellow                 -> sun-soft
- *   secondary-yellow                   -> sun
- *   background-orange / primary-orange -> peach / coral
- *   line-1                             -> line
+ * Each text token is a "Mobile/*" text style from Figma, with an "-lg" variant
+ * for the matching "Desktop/*" style. A token generates a text-* utility that
+ * sets size, line height, tracking and weight together, e.g.
+ * `text-h1 lg:text-h1-lg`.
  */
 @theme {
-  --color-ink: #171b2c;
-  --color-ink-secondary: #656770;
-  --color-ink-tertiary: #6d7384;
-  --color-on-dark-secondary: #e7e7ec;
-  --color-on-dark-tertiary: #9e9faa;
-
-  --color-brand: #3157f6;
-  --color-brand-strong: #2444d4;
-  --color-brand-soft: #e2e8ff;
-
-  --color-cream: #f9f8f3;
-  --color-sun: #ffee7e;
-  --color-sun-soft: #fff1c2;
-  --color-mustard: #e9d659;
-  --color-peach: #ffcb9f;
-  --color-coral: #ff704d;
-  --color-line: #dbdfeb;
-  --color-danger: #c62828;
-
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-badge: 0 4px 12px rgb(0 0 0 / 0.1);
-  --shadow-card: 0 12px 16px rgb(23 27 44 / 0.04);
-  --shadow-photo: 0 3px 5px rgb(0 0 0 / 0.1), 0 0 3px rgb(0 0 0 / 0.07);
-
-  /*
-   * Type scale: the "Mobile/*" text styles from Figma, plus an "-lg" variant
-   * with the matching "Desktop/*" style. Each token generates a text-* utility
-   * that sets size, line height, tracking and weight together.
-   */
   --text-h1: 2.5rem;
   --text-h1--line-height: 1.1;
   --text-h1--letter-spacing: -0.025em;
