@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Design tokens, mapped 1:1 from the Figma variables.
+ * Figma name -> token:
+ *   text-primary / background-darkblue -> ink
+ *   text-secondary                     -> ink-secondary
+ *   text-tertiary                      -> ink-tertiary
+ *   text-white-secondary / -tertiary   -> on-dark-secondary / on-dark-tertiary
+ *   primary-blue / primary-blue-light  -> brand / brand-soft
+ *   backgrounnd-light-yellow           -> cream
+ *   backgrounnd-yellow                 -> sun-soft
+ *   secondary-yellow                   -> sun
+ *   background-orange / primary-orange -> peach / coral
+ *   line-1                             -> line
+ */
+@theme {
+  --color-ink: #171b2c;
+  --color-ink-secondary: #656770;
+  --color-ink-tertiary: #6d7384;
+  --color-on-dark-secondary: #e7e7ec;
+  --color-on-dark-tertiary: #9e9faa;
+
+  --color-brand: #3157f6;
+  --color-brand-strong: #2444d4;
+  --color-brand-soft: #e2e8ff;
+
+  --color-cream: #f9f8f3;
+  --color-sun: #ffee7e;
+  --color-sun-soft: #fff1c2;
+  --color-mustard: #e9d659;
+  --color-peach: #ffcb9f;
+  --color-coral: #ff704d;
+  --color-line: #dbdfeb;
+  --color-danger: #c62828;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-badge: 0 4px 12px rgb(0 0 0 / 0.1);
+  --shadow-card: 0 12px 16px rgb(23 27 44 / 0.04);
+  --shadow-photo: 0 3px 5px rgb(0 0 0 / 0.1), 0 0 3px rgb(0 0 0 / 0.07);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/*
+ * Type scale. Each utility carries the "Mobile/*" text style from Figma and
+ * switches to the matching "Desktop/*" style at the lg breakpoint (64rem).
+ */
+@utility text-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  @media (width >= 64rem) {
+    /* 52px at 1024px wide, reaching the 64px of the 1280px design */
+    font-size: clamp(3.25rem, 5vw, 4rem);
+    line-height: 1.09375;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility text-h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  letter-spacing: -0.025em;
+  @media (width >= 64rem) {
+    font-size: 3.5rem;
+    line-height: 4rem;
+  }
+}
+
+@utility text-h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 2.25rem;
+  letter-spacing: -0.025em;
+  @media (width >= 64rem) {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+}
+
+@utility text-h5 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  @media (width >= 64rem) {
+    line-height: 2rem;
+  }
+}
+
+@utility text-stat {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2.5rem;
+  line-height: 2.75rem;
+  letter-spacing: -0.025em;
+  @media (width >= 64rem) {
+    font-size: 4rem;
+    line-height: 4.375rem;
+  }
+}
+
+@utility text-quote {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  @media (width >= 64rem) {
+    font-size: 1.875rem;
+    line-height: 2.75rem;
+    letter-spacing: -0.025em;
+  }
+}
+
+@utility text-subtitle-1 {
+  font-size: 1rem;
+  line-height: 1.625rem;
+  @media (width >= 64rem) {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+@utility text-subtitle-2 {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  @media (width >= 64rem) {
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+}
+
+@utility text-body {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+@utility text-overline {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* keeps anchored sections clear of the sticky header */
+    scroll-padding-top: 4.5rem;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
