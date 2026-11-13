@@ -134,12 +134,14 @@ npx vitest        # modo watch
 
 Construído com o **Claude Code** (Anthropic), conectado ao Figma pelo **servidor MCP oficial do Figma**, que forneceu a estrutura dos frames, as medidas, as variáveis de design e os assets exportados.
 
-Eu defini a direção, a arquitetura modular, escrevi o padrão de components da aplicação.
+Eu defini a direção e a padronização de como os componentes devem ser construídos: arquitetura modular com um módulo por seção, Server Components por padrão, conteúdo tipado fora do JSX, tema em TypeScript consumido por tokens do Tailwind, classes montadas com `clsx` e `tailwind-merge`, código sem comentários, HTML semântico com uso completo por teclado, e o critério do que merece teste. O Claude Code escreveu o código seguindo essas definições, e eu revisei o resultado.
+
+Esses padrões estão registrados em [`.claude/skills/component-standards/SKILL.md`](.claude/skills/component-standards/SKILL.md), um arquivo de skill que o Claude Code carrega antes de criar ou alterar qualquer componente, para que o que for feito daqui em diante siga as mesmas regras.
 
 ### Tempo gasto
 
-Aproximadamente 1 hora de implementação e verificação assistidas por IA.
-Aproximadamente 1 hora de validação da tela e testes de todas funcionalidades e validação se foi seguido o padrão de código definido
+- Aproximadamente 1 hora de implementação e verificação assistidas por IA.
+- Aproximadamente 1 hora de validação da tela, testes de todas as funcionalidades e conferência de que o padrão de código definido foi seguido.
 
 ---
 
@@ -285,8 +287,11 @@ npx vitest        # watch mode
 
 Built with **Claude Code** (Anthropic), connected to Figma through the official **Figma MCP server**, which supplied the frame structure, measurements, design variables and exported assets.
 
-I set the direction — the stack required by the brief, the modular architecture and an incremental commit history — and Claude Code wrote the implementation, one section per commit. Results were verified as described in "How it was checked": automated checks, screenshot comparison against the Figma frames at several widths, scripted interaction tests and Lighthouse.
+I defined the direction and the standards for how components must be built: a modular architecture with one module per section, Server Components by default, typed content kept out of JSX, a TypeScript theme consumed through Tailwind tokens, class names built with `clsx` and `tailwind-merge`, code without comments, semantic HTML with full keyboard support, and the criterion for what deserves a test. Claude Code wrote the code following those definitions, and I reviewed the result.
+
+Those standards are recorded in [`.claude/skills/component-standards/SKILL.md`](.claude/skills/component-standards/SKILL.md), a skill file that Claude Code loads before creating or changing any component, so that further work follows the same rules.
 
 ### Time spent
 
-Approximately 2 hours of AI-assisted implementation and verification without tests.
+- Approximately 1 hour of AI-assisted implementation and verification.
+- Approximately 1 hour validating the page, testing every feature and checking that the defined code standards were followed.
