@@ -22,7 +22,7 @@ npm run dev        # http://localhost:3000
 | `npm run start`     | Serve o build de produção                        |
 | `npm run lint`      | ESLint                                           |
 | `npm run typecheck` | TypeScript, sem emitir arquivos                  |
-| `npm test`          | Testes unitários (Vitest)                        |
+| `npm test`          | Testes unitários e de componente (Vitest)        |
 
 ### Estrutura do projeto
 
@@ -89,7 +89,7 @@ Regras que segui: módulos nunca importam uns dos outros, apenas de `shared/`; o
 
 ### Como foi verificado
 
-- `npm run lint`, `npm run typecheck`, `npm test` (12 testes) e `npm run build` passam.
+- `npm run lint`, `npm run typecheck`, `npm test` (22 testes) e `npm run build` passam.
 - Capturas de tela do Chromium headless em 402px e 1280px foram comparadas com os frames do Figma, seção por seção, incluindo as alturas renderizadas (a poucos pixels dos frames; altura total no desktop de 5703px contra 5691px no Figma).
 - Sem overflow horizontal em 320, 360, 402, 640, 768, 1024, 1280, 1440 e 1920px.
 - Os fluxos do menu e do formulário foram exercitados com uma sessão de navegador automatizada contra o build de produção, sem erros no console.
@@ -100,7 +100,7 @@ Regras que segui: módulos nunca importam uns dos outros, apenas de `shared/`; o
 - Verificado apenas em Chromium headless. Não testado em Safari ou Firefox, em dispositivos físicos nem com leitor de tela.
 - O texto renderiza um pouco mais largo do que no export do Figma (alguns pixels por linha), então algumas larguras de linha diferem ligeiramente.
 - Os campos do formulário usam o texto de 14px do design, o que faz o Safari do iOS dar zoom ao focar.
-- Não há Storybook nem testes end-to-end no repositório; os testes unitários cobrem apenas a validação do formulário e o helper de classes.
+- Não há Storybook nem testes end-to-end no repositório; os testes (Vitest + Testing Library) cobrem a validação, o formulário de contato, o menu mobile e o helper de classes.
 - O metadata de Open Graph não tem imagem, pois não há URL publicada para resolvê-la.
 - Todos os links são âncoras internas e o envio do formulário é simulado.
 
@@ -136,7 +136,7 @@ npm run dev        # http://localhost:3000
 | `npm run start`     | Serves the production build                |
 | `npm run lint`      | ESLint                                     |
 | `npm run typecheck` | TypeScript, no emit                        |
-| `npm test`          | Unit tests (Vitest)                        |
+| `npm test`          | Unit and component tests (Vitest)          |
 
 ### Project structure
 
@@ -203,7 +203,7 @@ Rules I followed: modules never import from each other, only from `shared/`; con
 
 ### How it was checked
 
-- `npm run lint`, `npm run typecheck`, `npm test` (12 tests) and `npm run build` all pass.
+- `npm run lint`, `npm run typecheck`, `npm test` (22 tests) and `npm run build` all pass.
 - Screenshots from headless Chromium at 402px and 1280px were compared with the Figma frames, section by section, including rendered section heights (within a few pixels of the frames; total desktop height 5703px against 5691px in Figma).
 - No horizontal overflow at 320, 360, 402, 640, 768, 1024, 1280, 1440 and 1920px.
 - The menu and the form flows were exercised with a scripted browser session against the production build, with no console errors.
@@ -214,7 +214,7 @@ Rules I followed: modules never import from each other, only from `shared/`; con
 - Checked in headless Chromium only. Not tested in Safari or Firefox, on physical devices, or with a screen reader.
 - Text renders slightly wider than in the Figma export (a few pixels per line), so some line widths differ marginally.
 - Form inputs use the design's 14px text, which makes iOS Safari zoom in on focus.
-- No Storybook and no end-to-end tests in the repository; the unit tests cover the form validation and the class-name helper only.
+- No Storybook and no end-to-end tests in the repository; the tests (Vitest + Testing Library) cover the validation, the contact form, the mobile menu and the class-name helper.
 - Open Graph metadata has no image, since there is no deployed URL to resolve it against.
 - All links are in-page anchors and the form submission is mocked.
 
