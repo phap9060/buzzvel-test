@@ -8,6 +8,11 @@ export type ContactChannel = {
 
 export type ContactFieldName = "name" | "email" | "message";
 
+export type ContactFieldsCopy = Record<
+  ContactFieldName,
+  { label: string; placeholder: string }
+>;
+
 export type ContactFormValues = Record<ContactFieldName, string>;
 
 export type ContactFormErrors = Partial<Record<ContactFieldName, string>>;

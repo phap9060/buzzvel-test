@@ -18,6 +18,7 @@ import { FormField } from "./FormField";
 import type { ContactFormProps, FormStatus } from "./ContactForm.types";
 
 export function ContactForm({
+  fields,
   submitLabel,
   submittingLabel,
   successMessage,
@@ -58,8 +59,8 @@ export function ContactForm({
         <FormField
           id="contact-name"
           name="name"
-          label="Full name"
-          placeholder="Your name"
+          label={fields.name.label}
+          placeholder={fields.name.placeholder}
           autoComplete="name"
           value={values.name}
           error={errors.name}
@@ -69,8 +70,8 @@ export function ContactForm({
           id="contact-email"
           name="email"
           type="email"
-          label="Email"
-          placeholder="youremail@example.com"
+          label={fields.email.label}
+          placeholder={fields.email.placeholder}
           autoComplete="email"
           value={values.email}
           error={errors.email}
@@ -79,8 +80,8 @@ export function ContactForm({
         <FormField
           id="contact-message"
           name="message"
-          label="Your question"
-          placeholder="Tell us how we can help..."
+          label={fields.message.label}
+          placeholder={fields.message.placeholder}
           multiline
           value={values.message}
           error={errors.message}

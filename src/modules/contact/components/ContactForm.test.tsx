@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { contactFields } from "../data";
 import { submitContactForm } from "../lib/submitContactForm";
 import { ContactForm } from "./ContactForm";
 
@@ -13,6 +14,7 @@ const submit = vi.mocked(submitContactForm);
 const renderForm = () =>
   render(
     <ContactForm
+      fields={contactFields}
       submitLabel="Send message"
       submittingLabel="Sending..."
       successMessage="Thanks, we will be in touch."

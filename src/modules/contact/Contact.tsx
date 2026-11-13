@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Container, Eyebrow, Section } from "@/shared/ui";
 import { ContactForm } from "./components/ContactForm";
-import { contactChannels, contactContent } from "./data";
+import { contactChannels, contactContent, contactFields } from "./data";
 
 const HEADING_ID = "contact-heading";
 const FORM_HEADING_ID = "contact-form-heading";
@@ -70,6 +70,7 @@ export function Contact() {
             {form.description}
           </p>
           <ContactForm
+            fields={contactFields}
             submitLabel={form.submitLabel}
             submittingLabel={form.submittingLabel}
             successMessage={form.successMessage}

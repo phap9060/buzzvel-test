@@ -1,5 +1,5 @@
 import { siteConfig } from "@/shared/config/site";
-import type { ContactChannel } from "./types";
+import type { ContactChannel, ContactFieldsCopy } from "./types";
 
 export const contactContent = {
   eyebrow: "Contact",
@@ -15,6 +15,15 @@ export const contactContent = {
       "Thanks! Your message was sent. We’ll reply within 24 hours.",
   },
 } as const;
+
+export const contactFields: ContactFieldsCopy = {
+  name: { label: "Full name", placeholder: "Your name" },
+  email: { label: "Email", placeholder: "youremail@example.com" },
+  message: {
+    label: "Your question",
+    placeholder: "Tell us how we can help...",
+  },
+};
 
 export const contactChannels: readonly ContactChannel[] = [
   {

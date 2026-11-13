@@ -1,6 +1,6 @@
 ---
 name: component-standards
-description: Standards for building and changing UI in this project — module layout, component shape, theme tokens, class names, responsive copy, accessibility and tests. Use before creating or editing any component, section, style or test under src/.
+description: Standards for building and changing UI in this project — folder and file layout, component shape, types, theme tokens, class names, responsive rules, accessibility and tests. Use before creating or editing any component, section, style or test under src/.
 ---
 
 # Component standards
@@ -14,10 +14,10 @@ Follow these rules for every change under `src/`. They describe how the existing
   ```
   <section>/
     <Section>.tsx     the section component
-    components/       sub-components used only by this section, each with its <Name>.types.ts
+    components/       sub-components used only by this section: <Name>.tsx with <Name>.types.ts
     lib/              logic used only by this section (with its tests)
     data.ts           typed content (mock data, no CMS)
-    types.ts          the module's types
+    types.ts          the types of the module's data, when data.ts needs them
     index.ts          the only entry point: export { <Section> } from "./<Section>"
   ```
 
@@ -31,9 +31,9 @@ Follow these rules for every change under `src/`. They describe how the existing
 
 - Server Component by default. Add `"use client"` only when the component needs state, effects or event handlers, and keep that component as small as possible (today: `MobileMenu` and `ContactForm`).
 - Named exports only: `export function Hero()`. No default exports outside `app/`.
-- No types are declared inside a component file. Each component has a `<Name>.types.ts` next to it that exports `<Name>Props` and any related types (variants, sizes, states); the component imports them with `import type`. Types that describe a module's data stay in the module's `types.ts`.
+- No types are declared inside a component file. Each component that takes props has a `<Name>.types.ts` next to it that exports `<Name>Props` and any related types (variants, sizes, states); the component imports them with `import type`. Section components without props need no types file. Types that describe a module's data stay in the module's `types.ts`.
 - Variants are string unions mapped to classes with a `Record<Variant, string>`.
-- Content never lives in JSX. Text, links and image paths come from the module's `data.ts`, typed in `types.ts`.
+- Content never lives in JSX. Text, links and image paths come from the module's `data.ts`, typed in `types.ts`, and reach Client Components as props. The only strings allowed in a component are short accessibility labels of its own controls (`aria-label="Open menu"`).
 - A component that renders a root element accepts `className` and merges it with `cn()` so the caller can override defaults.
 - No code comments. Names and structure must make the intent clear; decisions that need explaining go in the README.
 
@@ -43,13 +43,13 @@ Follow these rules for every change under `src/`. They describe how the existing
 - The theme lives in `src/theme/` as TypeScript (`colors.ts`, `typography.ts`, `shadows.ts`, `base.ts`) and is assembled by `tailwind.config.ts`. `src/app/globals.css` stays as the two-line Tailwind entry. A new colour, text style or shadow is added to the theme first, then used by name.
 - Use theme tokens, not raw values: `text-ink-secondary`, `bg-brand`, `shadow-card`. No hex colours in class names.
 - Typography uses the text-style tokens, mobile first with the desktop style at `lg`: `text-h3 lg:text-h3-lg`, `text-subtitle-1 lg:text-subtitle-1-lg`. Headings add `font-display`.
-- Prefer the spacing scale (`max-w-130`, `h-102`) over arbitrary values (`max-w-[520px]`). One unit is 4px.
+- Use canonical classes: the spacing scale (`max-w-130`, `h-102`, `-right-4.75`), fractions (`max-w-1/2`) and bare values (`aspect-346/380`, `z-60`) instead of arbitrary values (`max-w-[520px]`). One spacing unit is 4px. Square brackets are only for values with no canonical form: `calc()`, custom grid templates, transition property lists.
 - Build class names with `cn()` from `@/shared/lib/cn` whenever they are conditional or merged. Never concatenate with template strings. When a token is added to the theme, `cn()` picks it up from `src/theme`; keep its tests passing.
 
 ## 4. Responsive
 
 - Mobile first. The mobile frame (402px) applies below `lg` (1024px); the desktop frame (1280px) applies from `lg` up.
-- Sections use `Section` for vertical rhythm and `Container` for the content column. Do not re-declare page padding inside a module.
+- Sections use `Section` for vertical rhythm and labelling, and `Container` for the content column. Do not re-declare page padding inside a module. `Hero` and `FinalCta` render their own `<section>` because they clip decoration that overflows; they keep the same vertical padding and `aria-labelledby`.
 - Where the mobile and desktop frames disagree in content (copy, language, colour), choose one version, use it at every width, and record the choice and the reason in the README section "Design differences between mobile and web". Do not ship two versions of the same text.
 - No horizontal overflow from 320px up.
 
@@ -78,7 +78,7 @@ Run all four and fix anything that fails:
 
 ```bash
 npm run lint
-npm run typecheck
+npm run typecheck   # generates the Next route types first
 npm test
 npm run build
 ```

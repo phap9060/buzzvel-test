@@ -48,7 +48,7 @@ src/
     lib/, config/      class-name helper, site-wide constants
 ```
 
-Each component keeps its props and related types in a file of its own next to it (`Button.tsx` and `Button.types.ts`); shared components each live in their own folder (`shared/ui/button/`); folder names are kebab-case; a module's `types.ts` holds the types of its data.
+Conventions: folder names are kebab-case and component files PascalCase; every component that takes props keeps them, with any related types, in a file of its own next to it (`Button.tsx` and `Button.types.ts`); shared components each live in their own folder with an `index.ts` (`shared/ui/button/`); a module's `types.ts` holds the types of its data.
 
 Rules followed: modules never import from each other, only from `shared/`; content lives in each module's `data.ts` (mock data, no CMS); everything is a Server Component except the two pieces that need state — the mobile menu and the contact form.
 
