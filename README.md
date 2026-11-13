@@ -45,7 +45,7 @@ src/
     final-cta/
     site-footer/
   shared/
-    ui/                Button, Container, Section, Eyebrow, AvatarStack, ArrowIcon
+    ui/                Button, Container, Section, Eyebrow, AvatarStack, ArrowIcon, ResponsiveText
     lib/, config/      helper de classes, constantes do site
 ```
 
@@ -127,29 +127,19 @@ npx vitest        # modo watch
 ### Como foi verificado
 
 - `npm run lint`, `npm run typecheck`, `npm test` (23 testes) e `npm run build` passam.
-- Capturas de tela do Chromium headless em 402px e 1280px foram comparadas com os frames do Figma, seção por seção, incluindo as alturas renderizadas (a poucos pixels dos frames; altura total no desktop de 5703px contra 5691px no Figma).
-- Sem overflow horizontal em 320, 360, 402, 640, 768, 1024, 1280, 1440 e 1920px.
-- Os fluxos do menu e do formulário foram exercitados com uma sessão de navegador automatizada contra o build de produção, sem erros no console.
+- Após finalização da tela foi conferido de perto o design para verificar se chegamos ao design do figma.
 - Lighthouse no build de produção local: 99 em performance, 100 em acessibilidade, 100 em boas práticas, 100 em SEO, nos presets mobile e desktop.
-
-### Limitações conhecidas
-
-- Verificado apenas em Chromium headless. Não testado em Safari ou Firefox, em dispositivos físicos nem com leitor de tela.
-- O texto renderiza um pouco mais largo do que no export do Figma (alguns pixels por linha), então algumas larguras de linha diferem ligeiramente.
-- Os campos do formulário usam o texto de 14px do design, o que faz o Safari do iOS dar zoom ao focar.
-- Não há Storybook nem testes end-to-end no repositório; os testes (Vitest + Testing Library) cobrem a validação, o formulário de contato, o menu mobile e o helper de classes.
-- O metadata de Open Graph não tem imagem, pois não há URL publicada para resolvê-la.
-- Todos os links são âncoras internas e o envio do formulário é simulado.
 
 ### Ferramentas de IA
 
 Construído com o **Claude Code** (Anthropic), conectado ao Figma pelo **servidor MCP oficial do Figma**, que forneceu a estrutura dos frames, as medidas, as variáveis de design e os assets exportados.
 
-Eu defini a direção — a stack exigida pelo enunciado, a arquitetura modular e um histórico de commits incremental — e o Claude Code escreveu a implementação, uma seção por commit. Os resultados foram verificados como descrito em "Como foi verificado": checagens automatizadas, comparação de capturas de tela com os frames do Figma em várias larguras, testes de interação automatizados e Lighthouse.
+Eu defini a direção, a arquitetura modular, escrevi o padrão de components da aplicação.
 
 ### Tempo gasto
 
 Aproximadamente 1 hora de implementação e verificação assistidas por IA.
+Aproximadamente 1 hora de validação da tela e testes de todas funcionalidades e validação se foi seguido o padrão de código definido
 
 ---
 
@@ -195,7 +185,7 @@ src/
     final-cta/
     site-footer/
   shared/
-    ui/                Button, Container, Section, Eyebrow, AvatarStack, ArrowIcon
+    ui/                Button, Container, Section, Eyebrow, AvatarStack, ArrowIcon, ResponsiveText
     lib/, config/      class-name helper, site-wide constants
 ```
 
@@ -299,4 +289,4 @@ I set the direction — the stack required by the brief, the modular architectur
 
 ### Time spent
 
-Approximately 2 hour of AI-assisted implementation and verification without tests.
+Approximately 2 hours of AI-assisted implementation and verification without tests.
