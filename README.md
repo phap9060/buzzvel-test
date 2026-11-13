@@ -43,11 +43,12 @@ src/
     final-cta/
     site-footer/
   shared/
-    ui/                Button, Container, Section, Eyebrow, AvatarStack, ArrowIcon
+    ui/                one folder per component (Button, Container, Section, Eyebrow,
+                       AvatarStack, ArrowIcon): component, types and index.ts
     lib/, config/      class-name helper, site-wide constants
 ```
 
-Each component keeps its props and related types in a file of its own next to it (`Button.tsx` and `Button.types.ts`); a module's `types.ts` holds the types of its data.
+Each component keeps its props and related types in a file of its own next to it (`Button.tsx` and `Button.types.ts`); shared components each live in their own folder (`shared/ui/Button/`); a module's `types.ts` holds the types of its data.
 
 Rules followed: modules never import from each other, only from `shared/`; content lives in each module's `data.ts` (mock data, no CMS); everything is a Server Component except the two pieces that need state — the mobile menu and the contact form.
 

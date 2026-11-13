@@ -23,6 +23,7 @@ Follow these rules for every change under `src/`. They describe how the existing
 
 - A module never imports from another module. Anything used by two modules moves to `src/shared/` (`ui/`, `lib/`, `config/`).
 - `src/app/page.tsx` only composes modules. It holds no markup of its own beyond the skip link and `<main>`.
+- Each shared component lives in its own folder, `src/shared/ui/<Name>/`, with `<Name>.tsx`, `<Name>.types.ts` and an `index.ts` that exports both; `src/shared/ui/index.ts` re-exports the public ones.
 - Import shared UI through the barrel: `import { Button, Container } from "@/shared/ui"`.
 
 ## 2. Components
