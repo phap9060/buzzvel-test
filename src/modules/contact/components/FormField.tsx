@@ -62,7 +62,7 @@ export function FormField({
         )}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-[17px] top-3 truncate text-body text-ink-tertiary peer-[:not(:placeholder-shown)]:hidden"
+          className="pointer-events-none absolute inset-x-[17px] top-3 truncate text-body text-ink-secondary peer-[:not(:placeholder-shown)]:hidden"
         >
           <ResponsiveText text={placeholder} />
         </span>

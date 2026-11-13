@@ -82,7 +82,7 @@ Como isso foi implementado: um componente `ResponsiveText` renderiza os dois tex
 | Não há estados de hover, foco, erro ou sucesso | Adicionei hovers discretos, um anel de foco visível, erros junto aos campos e uma mensagem de sucesso |
 | O parágrafo de "The people" é lorem ipsum | Mantido como no design |
 | Os destinos da navegação e dos botões não são especificados | Só navegam os links cujo nome corresponde a uma seção que existe na página (Courses, Community, Explore courses, See how it works, Browse all courses, Explore all courses, Categories, Contact, o logo e o e-mail). Os demais — Log in, Start learning, For Teams, About, os cards de categoria, View course, Explore teachers and students, Join Luma e os outros links do rodapé — levariam a páginas que não existem, então ficam sem função: são `<a>` sem `href`, não fazem nada ao clicar e ficam fora da ordem de Tab |
-| Três cores de texto medem 4,45:1 contra o fundo | Único ponto em que me afastei do Figma: usei a cor mais escura seguinte da paleta para cumprir WCAG AA (rótulos dos passos, valor de "Response time", "Browse all courses") |
+| Quatro cores de texto medem 4,45:1 contra o fundo | Único ponto em que me afastei do Figma: usei a cor mais escura seguinte da paleta para cumprir WCAG AA (rótulos dos passos, valor de "Response time", "Browse all courses", placeholders do formulário) |
 
 ### Interações
 
@@ -128,7 +128,7 @@ npx vitest        # modo watch
 
 - `npm run lint`, `npm run typecheck`, `npm test` (24 testes) e `npm run build` passam.
 - Após finalização da tela foi conferido de perto o design para verificar se chegamos ao design do figma.
-- Lighthouse no build de produção local: 99 em performance, 100 em acessibilidade, 100 em boas práticas, 100 em SEO, nos presets mobile e desktop.
+- Lighthouse no build de produção local: 98 em performance no preset mobile e 100 no desktop; 100 em acessibilidade, 100 em boas práticas e 100 em SEO nos dois.
 
 ### Ferramentas de IA
 
@@ -225,7 +225,7 @@ How this is implemented: a `ResponsiveText` component renders both texts and CSS
 | No hover, focus, error or success states | Added restrained hover states, a visible focus ring, inline field errors and a success message |
 | "The people" paragraph is lorem ipsum | Kept as designed |
 | Navigation and button destinations are not specified | Only links whose name matches a section that exists on the page navigate (Courses, Community, Explore courses, See how it works, Browse all courses, Explore all courses, Categories, Contact, the logo and the email). The rest — Log in, Start learning, For Teams, About, the category cards, View course, Explore teachers and students, Join Luma and the other footer links — would lead to pages that do not exist, so they have no function: they are `<a>` without `href`, do nothing on click and stay out of the Tab order |
-| Three text colours measure 4.45:1 against their background | The only place I departed from Figma: used the next darker palette colour to meet WCAG AA (step labels, "Response time" value, "Browse all courses") |
+| Four text colours measure 4.45:1 against their background | The only place I departed from Figma: used the next darker palette colour to meet WCAG AA (step labels, "Response time" value, "Browse all courses", form placeholders) |
 
 ### Interactions
 
@@ -271,7 +271,7 @@ npx vitest        # watch mode
 
 - `npm run lint`, `npm run typecheck`, `npm test` (24 tests) and `npm run build` all pass.
 - Once the page was finished, the design was checked closely to confirm that it matches the Figma design.
-- Lighthouse on the local production build: 99 performance, 100 accessibility, 100 best practices, 100 SEO, on both the mobile and the desktop presets.
+- Lighthouse on the local production build: 98 performance on the mobile preset and 100 on desktop; 100 accessibility, 100 best practices and 100 SEO on both.
 
 ### AI tools
 
