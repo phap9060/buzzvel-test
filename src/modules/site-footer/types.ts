@@ -1,6 +1,6 @@
 export type FooterLink = {
   label: string;
-  href: string;
+  href?: string;
 };
 
 export type FooterGroup = {

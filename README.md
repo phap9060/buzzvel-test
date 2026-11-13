@@ -81,7 +81,7 @@ Como isso foi implementado: um componente `ResponsiveText` renderiza os dois tex
 | Não há estado aberto para o menu mobile | Um painel abaixo do cabeçalho, reutilizando o fundo do cabeçalho e os estilos de botão |
 | Não há estados de hover, foco, erro ou sucesso | Adicionei hovers discretos, um anel de foco visível, erros junto aos campos e uma mensagem de sucesso |
 | O parágrafo de "The people" é lorem ipsum | Mantido como no design |
-| Os destinos da navegação e dos botões não são especificados | Apontam para a seção da página mais próxima do assunto |
+| Os destinos da navegação e dos botões não são especificados | Só navegam os links cujo nome corresponde a uma seção que existe na página (Courses, Community, Explore courses, See how it works, Browse all courses, Explore all courses, Categories, Contact, o logo e o e-mail). Os demais — Log in, Start learning, For Teams, About, os cards de categoria, View course, Explore teachers and students, Join Luma e os outros links do rodapé — levariam a páginas que não existem, então ficam sem função: são `<a>` sem `href`, não fazem nada ao clicar e ficam fora da ordem de Tab |
 | Três cores de texto medem 4,45:1 contra o fundo | Único ponto em que me afastei do Figma: usei a cor mais escura seguinte da paleta para cumprir WCAG AA (rótulos dos passos, valor de "Response time", "Browse all courses") |
 
 ### Interações
@@ -100,7 +100,7 @@ Como isso foi implementado: um componente `ResponsiveText` renderiza os dois tex
 ### Testes
 
 ```bash
-npm test          # roda os 23 testes uma vez
+npm test          # roda os 24 testes uma vez
 npx vitest        # modo watch
 ```
 
@@ -112,7 +112,7 @@ npx vitest        # modo watch
 | --- | --- | --- |
 | `contact/lib/validation.ts` | 8 | É a única regra de negócio da página (campos obrigatórios, formato de e-mail, tamanho mínimo). É uma função pura, com várias ramificações e casos de borda (entrada só com espaços, e-mails malformados), fácil de quebrar ao alterar uma regra. |
 | `contact/components/ContactForm.tsx` | 6 | É um dos dois Client Components e o que tem mais estados: ocioso, com erros, enviando, sucesso. Os testes cobrem o que a validação sozinha não garante: o erro aparece associado ao campo (`aria-invalid`, `aria-describedby`), o foco vai para o primeiro campo inválido, o erro some ao editar, o botão fica desabilitado durante o envio e o sucesso é anunciado em `role="status"`. Um teste confirma que os textos em português do frame mobile estão marcados com `lang="pt"`. |
-| `site-header/components/MobileMenu.tsx` | 5 | É o outro Client Component e a única navegação em telas pequenas: se quebrar, o site fica sem menu no mobile. Os testes cobrem abrir e fechar, `aria-expanded`/`aria-controls`, uso só por teclado, Escape devolvendo o foco ao botão e o fechamento ao escolher um link. |
+| `site-header/components/MobileMenu.tsx` | 6 | É o outro Client Component e a única navegação em telas pequenas: se quebrar, o site fica sem menu no mobile. Os testes cobrem abrir e fechar, `aria-expanded`/`aria-controls`, uso só por teclado, Escape devolvendo o foco ao botão, o fechamento ao escolher um link e que as ações sem destino ficam fora da ordem de Tab. |
 | `shared/lib/cn.ts` | 4 | É usado por todos os componentes compartilhados. O `tailwind-merge` não conhece os tokens do tema por padrão; sem a configuração, `text-h1` (tamanho) e `text-ink` (cor) poderiam se anular. Os testes travam essa configuração. |
 
 **O que não é testado e por quê**
@@ -126,7 +126,7 @@ npx vitest        # modo watch
 
 ### Como foi verificado
 
-- `npm run lint`, `npm run typecheck`, `npm test` (23 testes) e `npm run build` passam.
+- `npm run lint`, `npm run typecheck`, `npm test` (24 testes) e `npm run build` passam.
 - Após finalização da tela foi conferido de perto o design para verificar se chegamos ao design do figma.
 - Lighthouse no build de produção local: 99 em performance, 100 em acessibilidade, 100 em boas práticas, 100 em SEO, nos presets mobile e desktop.
 
@@ -147,7 +147,8 @@ Esses padrões estão registrados em [`.claude/skills/component-standards/SKILL.
 
 ## English
 
-A responsive landing page for "Luma", a fictional learning platform, built from the supplied Figma file with **Next.js (App Router)**, **TypeScript** and **Tailwind CSS**.
+A responsive landing page for "Luma", a learning platform.
+**Next.js (App Router)**, **TypeScript** and **Tailwind CSS**.
 
 ### Getting started
 
@@ -191,7 +192,7 @@ src/
     lib/, config/      class-name helper, site-wide constants
 ```
 
-Rules I followed: modules never import from each other, only from `shared/`; content lives in each module's `data.ts` (mock data, no CMS); everything is a Server Component except the two pieces that need state — the mobile menu and the contact form.
+Rules followed: modules never import from each other, only from `shared/`; content lives in each module's `data.ts` (mock data, no CMS); everything is a Server Component except the two pieces that need state — the mobile menu and the contact form.
 
 ### Key decisions
 
@@ -223,7 +224,7 @@ How this is implemented: a `ResponsiveText` component renders both texts and CSS
 | No open state for the mobile menu | A panel under the header reusing the header surface and button styles |
 | No hover, focus, error or success states | Added restrained hover states, a visible focus ring, inline field errors and a success message |
 | "The people" paragraph is lorem ipsum | Kept as designed |
-| Navigation and button destinations are not specified | They point at the closest matching section of the page |
+| Navigation and button destinations are not specified | Only links whose name matches a section that exists on the page navigate (Courses, Community, Explore courses, See how it works, Browse all courses, Explore all courses, Categories, Contact, the logo and the email). The rest — Log in, Start learning, For Teams, About, the category cards, View course, Explore teachers and students, Join Luma and the other footer links — would lead to pages that do not exist, so they have no function: they are `<a>` without `href`, do nothing on click and stay out of the Tab order |
 | Three text colours measure 4.45:1 against their background | The only place I departed from Figma: used the next darker palette colour to meet WCAG AA (step labels, "Response time" value, "Browse all courses") |
 
 ### Interactions
@@ -242,7 +243,7 @@ How this is implemented: a `ResponsiveText` component renders both texts and CSS
 ### Tests
 
 ```bash
-npm test          # runs the 23 tests once
+npm test          # runs the 24 tests once
 npx vitest        # watch mode
 ```
 
@@ -254,7 +255,7 @@ npx vitest        # watch mode
 | --- | --- | --- |
 | `contact/lib/validation.ts` | 8 | It is the only business rule on the page (required fields, email format, minimum length). It is a pure function with several branches and edge cases (whitespace-only input, malformed emails), easy to break when a rule changes. |
 | `contact/components/ContactForm.tsx` | 6 | It is one of the two Client Components and the one with the most states: idle, with errors, submitting, success. The tests cover what validation alone does not guarantee: the error is tied to its field (`aria-invalid`, `aria-describedby`), focus moves to the first invalid field, the error clears on edit, the button is disabled while submitting, and success is announced through `role="status"`. One test confirms that the Portuguese copy of the mobile frame is marked with `lang="pt"`. |
-| `site-header/components/MobileMenu.tsx` | 5 | It is the other Client Component and the only navigation on small screens: if it breaks, the site has no menu on mobile. The tests cover opening and closing, `aria-expanded`/`aria-controls`, keyboard-only use, Escape returning focus to the button, and closing when a link is chosen. |
+| `site-header/components/MobileMenu.tsx` | 6 | It is the other Client Component and the only navigation on small screens: if it breaks, the site has no menu on mobile. The tests cover opening and closing, `aria-expanded`/`aria-controls`, keyboard-only use, Escape returning focus to the button, closing when a link is chosen, and actions without a destination staying out of the Tab order. |
 | `shared/lib/cn.ts` | 4 | Every shared component uses it. `tailwind-merge` does not know the theme tokens by default; without the configuration, `text-h1` (size) and `text-ink` (colour) could cancel each other. The tests lock that configuration in. |
 
 **What is not tested, and why**
@@ -268,20 +269,9 @@ npx vitest        # watch mode
 
 ### How it was checked
 
-- `npm run lint`, `npm run typecheck`, `npm test` (23 tests) and `npm run build` all pass.
-- Screenshots from headless Chromium at 402px and 1280px were compared with the Figma frames, section by section, including rendered section heights (within a few pixels of the frames; total desktop height 5703px against 5691px in Figma).
-- No horizontal overflow at 320, 360, 402, 640, 768, 1024, 1280, 1440 and 1920px.
-- The menu and the form flows were exercised with a scripted browser session against the production build, with no console errors.
+- `npm run lint`, `npm run typecheck`, `npm test` (24 tests) and `npm run build` all pass.
+- Once the page was finished, the design was checked closely to confirm that it matches the Figma design.
 - Lighthouse on the local production build: 99 performance, 100 accessibility, 100 best practices, 100 SEO, on both the mobile and the desktop presets.
-
-### Known gaps
-
-- Checked in headless Chromium only. Not tested in Safari or Firefox, on physical devices, or with a screen reader.
-- Text renders slightly wider than in the Figma export (a few pixels per line), so some line widths differ marginally.
-- Form inputs use the design's 14px text, which makes iOS Safari zoom in on focus.
-- No Storybook and no end-to-end tests in the repository; the tests (Vitest + Testing Library) cover the validation, the contact form, the mobile menu and the class-name helper.
-- Open Graph metadata has no image, since there is no deployed URL to resolve it against.
-- All links are in-page anchors and the form submission is mocked.
 
 ### AI tools
 

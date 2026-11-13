@@ -13,10 +13,7 @@ export function CategoryCard({
   linkLabel,
 }: CategoryCardProps) {
   return (
-    <a
-      href={category.href}
-      className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-white p-6 transition-[border-color,box-shadow] duration-200 hover:border-brand hover:shadow-card lg:min-h-[260px] lg:p-7"
-    >
+    <a className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-white p-6 transition-[border-color,box-shadow] duration-200 hover:border-brand hover:shadow-card lg:min-h-[260px] lg:p-7">
       <div>
         <span
           aria-hidden="true"

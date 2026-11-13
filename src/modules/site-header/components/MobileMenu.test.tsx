@@ -32,10 +32,12 @@ describe("MobileMenu", () => {
       document.getElementById(toggle.getAttribute("aria-controls") ?? ""),
     ).toContainElement(screen.getByRole("navigation", { name: "Main" }));
     for (const link of [...primaryNav, loginLink, signupLink]) {
-      expect(screen.getByRole("link", { name: link.label })).toHaveAttribute(
-        "href",
-        link.href,
-      );
+      const item = screen.getByText(link.label);
+      if (link.href) {
+        expect(item).toHaveAttribute("href", link.href);
+      } else {
+        expect(item).not.toHaveAttribute("href");
+      }
     }
   });
 
@@ -63,6 +65,19 @@ describe("MobileMenu", () => {
 
     expect(screen.queryByRole("navigation")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Open menu" })).toHaveFocus();
+  });
+
+  it("keeps actions without a destination out of the tab order", async () => {
+    const user = userEvent.setup();
+    renderMenu();
+
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+
+    expect(screen.queryByRole("link", { name: loginLink.label })).toBeNull();
+    expect(screen.queryByRole("link", { name: signupLink.label })).toBeNull();
+    expect(screen.getAllByRole("link")).toHaveLength(
+      primaryNav.filter((link) => link.href).length,
+    );
   });
 
   it("closes when a link is chosen", async () => {

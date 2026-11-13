@@ -13,12 +13,19 @@ type CommonProps = {
 };
 
 type ButtonAsLink = CommonProps &
-  Omit<ComponentPropsWithoutRef<"a">, keyof CommonProps> & { href: string };
+  Omit<ComponentPropsWithoutRef<"a">, keyof CommonProps | "href"> & {
+    href: string | undefined;
+  };
 
 type ButtonAsButton = CommonProps &
   Omit<ComponentPropsWithoutRef<"button">, keyof CommonProps> & {
-    href?: undefined;
+    href?: never;
   };
+
+export type ActionLink = {
+  label: string;
+  href?: string;
+};
 
 export type ButtonProps = ButtonAsLink | ButtonAsButton;
 
@@ -52,16 +59,20 @@ export function Button(props: ButtonProps) {
     className,
   );
 
-  if (rest.href !== undefined) {
+  if ("href" in rest) {
     return (
-      <a {...rest} className={classes}>
+      <a {...(rest as ComponentPropsWithoutRef<"a">)} className={classes}>
         {children}
       </a>
     );
   }
 
   return (
-    <button type="button" {...rest} className={classes}>
+    <button
+      type="button"
+      {...(rest as ComponentPropsWithoutRef<"button">)}
+      className={classes}
+    >
       {children}
     </button>
   );

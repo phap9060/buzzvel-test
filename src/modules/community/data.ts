@@ -1,3 +1,4 @@
+import type { ActionLink } from "@/shared/ui";
 import type { MosaicColumn } from "./types";
 
 export const communityContent = {
@@ -5,7 +6,7 @@ export const communityContent = {
   title: "Meet international students & teachers",
   description:
     "Morbi sit egestas dignissim pharetra, sed amet. Tempus justo senectus risus ac vel, velit, nunc. Eget commodo eget in aliquam facilisi facilisi nec magna hendrerit. Placerat ipsum sit tellus urna, faucibus aenean lorem faucibus integer.",
-  action: { label: "Explore teachers and students", href: "#contact" },
+  action: { label: "Explore teachers and students" } as ActionLink,
 } as const;
 
 const photo = (file: string) => `/images/people/${file}.jpg`;

@@ -1,3 +1,4 @@
+import type { ActionLink } from "@/shared/ui";
 export const featuredCourse = {
   badge: "Featured course",
   eyebrow: "Most popular this month",
@@ -10,6 +11,6 @@ export const featuredCourse = {
     src: "/images/featured-course.jpg",
     alt: "Designer sketching interface ideas at a desk covered with material samples and prototypes",
   },
-  primaryAction: { label: "View course", href: "#contact" },
+  primaryAction: { label: "View course" } as ActionLink,
   secondaryAction: { label: "Browse all courses", href: "#courses" },
 } as const;

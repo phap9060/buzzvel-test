@@ -9,6 +9,9 @@ export const base = plugin(({ addBase }) => {
     body: {
       "@apply bg-cream font-sans text-ink": {},
     },
+    "a:not([href])": {
+      "@apply cursor-default": {},
+    },
     ":focus-visible": {
       "@apply outline-2 outline-offset-2 outline-brand": {},
     },

@@ -55,6 +55,7 @@ Follow these rules for every change under `src/`. They describe how the existing
 - Semantic elements first: `header`, `nav`, `main`, `footer`, `section`, lists for repeated items, `figure`/`blockquote` for quotes, `dl` for stats.
 - Every `section` is labelled by its heading through `Section`'s `labelledBy`. One `h1` per page; heading levels never skip.
 - Interactive elements are native `<a>`, `<button>`, `<input>`, `<textarea>`. Never attach `onClick` to a `div` or `span`.
+- A link or button only gets an `href` when its destination exists on the page. An action whose destination does not exist (Log in, Start learning…) has no `href` in `data.ts`: it renders as `<a>` without `href`, does nothing and stays out of the tab order. Never point it at an unrelated section.
 - Everything is reachable and operable with the keyboard, with the visible focus ring from the theme. Disclosures expose `aria-expanded` and `aria-controls` and close on Escape, returning focus to their trigger.
 - Form fields have a `<label>`; errors are linked with `aria-describedby` and flagged with `aria-invalid`; status messages use `role="status"`.
 - Meaningful images get descriptive `alt`; decorative images get `alt=""` or `aria-hidden="true"`. Text in another language carries `lang`.

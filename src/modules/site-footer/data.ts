@@ -13,27 +13,23 @@ export const footerGroups: readonly FooterGroup[] = [
     links: [
       { label: "Courses", href: "#courses" },
       { label: "Categories", href: "#courses" },
-      { label: "Instructors", href: "#community" },
-      { label: "For Teams", href: "#contact" },
+      { label: "Instructors" },
+      { label: "For Teams" },
     ],
   },
   {
     id: "company",
     title: "Company",
-    links: [
-      { label: "About", href: "#how-it-works" },
-      { label: "Careers", href: "#contact" },
-      { label: "Journal", href: "#top" },
-    ],
+    links: [{ label: "About" }, { label: "Careers" }, { label: "Journal" }],
   },
   {
     id: "support",
     title: "Support",
     links: [
-      { label: "Help Center", href: "#contact" },
+      { label: "Help Center" },
       { label: "Contact", href: "#contact" },
-      { label: "Terms", href: "#top" },
-      { label: "Privacy", href: "#top" },
+      { label: "Terms" },
+      { label: "Privacy" },
     ],
   },
 ];
