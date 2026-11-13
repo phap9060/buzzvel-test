@@ -87,6 +87,33 @@ Regras que segui: módulos nunca importam uns dos outros, apenas de `shared/`; o
 - As imagens passam pelo `next/image` com `sizes`; a foto do hero é pré-carregada com prioridade alta e as demais são lazy. As fontes são servidas pelo próprio site via `next/font`, limitadas aos pesos que o design usa.
 - Apenas o menu e o formulário enviam JavaScript próprio para o cliente.
 
+### Testes
+
+```bash
+npm test          # roda os 22 testes uma vez
+npx vitest        # modo watch
+```
+
+**Critério.** Testei o código que tem comportamento — estado, ramificações, regras — e não o que é apenas marcação. Um teste só entra se puder falhar por um motivo que um usuário perceberia.
+
+**O que é testado e por quê**
+
+| Alvo | Testes | Por que este |
+| --- | --- | --- |
+| `contact/lib/validation.ts` | 8 | É a única regra de negócio da página (campos obrigatórios, formato de e-mail, tamanho mínimo). É uma função pura, com várias ramificações e casos de borda (entrada só com espaços, e-mails malformados), fácil de quebrar ao alterar uma regra. |
+| `contact/components/ContactForm.tsx` | 5 | É um dos dois Client Components e o que tem mais estados: ocioso, com erros, enviando, sucesso. Os testes cobrem o que a validação sozinha não garante: o erro aparece associado ao campo (`aria-invalid`, `aria-describedby`), o foco vai para o primeiro campo inválido, o erro some ao editar, o botão fica desabilitado durante o envio e o sucesso é anunciado em `role="status"`. |
+| `site-header/components/MobileMenu.tsx` | 5 | É o outro Client Component e a única navegação em telas pequenas: se quebrar, o site fica sem menu no mobile. Os testes cobrem abrir e fechar, `aria-expanded`/`aria-controls`, uso só por teclado, Escape devolvendo o foco ao botão e o fechamento ao escolher um link. |
+| `shared/lib/cn.ts` | 4 | É usado por todos os componentes compartilhados. O `tailwind-merge` não conhece os tokens do tema por padrão; sem a configuração, `text-h1` (tamanho) e `text-ink` (cor) poderiam se anular. Os testes travam essa configuração. |
+
+**O que não é testado e por quê**
+
+- **Seções estáticas** (Hero, Categories, Featured course, How it works, Testimonial, Community, Final CTA, Footer): são Server Components sem estado nem lógica, que só renderizam os dados de `data.ts`. Um teste ali apenas repetiria a marcação e quebraria a cada ajuste de texto, sem pegar defeito real. A correção delas é visual, e foi verificada comparando capturas de tela com o Figma.
+- **Primitivos de UI** (`Button`, `Container`, `Section`, `Eyebrow`…): sem lógica além de escolher classes; essa parte está coberta pelos testes do `cn()` e, indiretamente, pelos testes do formulário e do menu, que usam o `Button`.
+- **Layout responsivo e aparência**: o jsdom não calcula layout nem aplica CSS, então testes unitários não conseguem verificar isso. Foi conferido em navegador real (ver "Como foi verificado").
+- **`submitContactForm`**: é um envio simulado com um atraso fixo; nos testes do formulário ele é substituído por um mock.
+
+**Como os testes são escritos.** Vitest com Testing Library em jsdom. Os componentes são usados como um usuário os usaria — encontrados por rótulo e papel (`getByLabelText`, `getByRole`), operados com clique e teclado — e não por classes ou estado interno. Assim os testes também funcionam como verificação de acessibilidade: se um campo perder o `label` ou o botão perder o nome, o teste falha. Conferi que eles detectam regressões removendo de propósito as chamadas de foco do formulário e do menu: 3 testes falharam, e o código foi restaurado.
+
 ### Como foi verificado
 
 - `npm run lint`, `npm run typecheck`, `npm test` (22 testes) e `npm run build` passam.
@@ -200,6 +227,33 @@ Rules I followed: modules never import from each other, only from `shared/`; con
 - Meaningful photos have descriptions; decorative images and shapes have empty `alt` or `aria-hidden`.
 - Images go through `next/image` with `sizes`; the hero photo is preloaded with high fetch priority and the rest are lazy. Fonts are self-hosted by `next/font`, limited to the weights the design uses.
 - Only the menu and the form ship client-side JavaScript of their own.
+
+### Tests
+
+```bash
+npm test          # runs the 22 tests once
+npx vitest        # watch mode
+```
+
+**Criterion.** I tested the code that has behaviour — state, branches, rules — and not the code that is only markup. A test is only there if it can fail for a reason a user would notice.
+
+**What is tested, and why**
+
+| Target | Tests | Why this one |
+| --- | --- | --- |
+| `contact/lib/validation.ts` | 8 | It is the only business rule on the page (required fields, email format, minimum length). It is a pure function with several branches and edge cases (whitespace-only input, malformed emails), easy to break when a rule changes. |
+| `contact/components/ContactForm.tsx` | 5 | It is one of the two Client Components and the one with the most states: idle, with errors, submitting, success. The tests cover what validation alone does not guarantee: the error is tied to its field (`aria-invalid`, `aria-describedby`), focus moves to the first invalid field, the error clears on edit, the button is disabled while submitting, and success is announced through `role="status"`. |
+| `site-header/components/MobileMenu.tsx` | 5 | It is the other Client Component and the only navigation on small screens: if it breaks, the site has no menu on mobile. The tests cover opening and closing, `aria-expanded`/`aria-controls`, keyboard-only use, Escape returning focus to the button, and closing when a link is chosen. |
+| `shared/lib/cn.ts` | 4 | Every shared component uses it. `tailwind-merge` does not know the theme tokens by default; without the configuration, `text-h1` (size) and `text-ink` (colour) could cancel each other. The tests lock that configuration in. |
+
+**What is not tested, and why**
+
+- **Static sections** (Hero, Categories, Featured course, How it works, Testimonial, Community, Final CTA, Footer): they are Server Components with no state or logic that only render the data in `data.ts`. A test there would just restate the markup and break on every copy change without catching a real defect. Their correctness is visual, and it was checked by comparing screenshots with Figma.
+- **UI primitives** (`Button`, `Container`, `Section`, `Eyebrow`…): no logic beyond choosing classes; that part is covered by the `cn()` tests and, indirectly, by the form and menu tests, which use `Button`.
+- **Responsive layout and appearance**: jsdom does not compute layout or apply CSS, so unit tests cannot verify it. It was checked in a real browser (see "How it was checked").
+- **`submitContactForm`**: a simulated submission with a fixed delay; the form tests replace it with a mock.
+
+**How the tests are written.** Vitest with Testing Library in jsdom. Components are used the way a user would use them — found by label and role (`getByLabelText`, `getByRole`), operated with clicks and the keyboard — and not through classes or internal state. That makes the tests double as an accessibility check: if a field loses its `label` or the button loses its name, the test fails. I confirmed they detect regressions by deliberately removing the focus calls from the form and the menu: 3 tests failed, and the code was restored.
 
 ### How it was checked
 
