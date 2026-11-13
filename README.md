@@ -7,6 +7,8 @@
 Uma landing page responsiva para a "Luma", uma plataforma de ensino.
 **Next.js (App Router)**, **TypeScript** e **Tailwind CSS**.
 
+**Demo publicada:** https://buzzvel-luma.vercel.app/
+
 ### Como rodar
 
 Desenvolvido e testado em Node.js 22.
@@ -149,6 +151,8 @@ Esses padrões estão registrados em [`.claude/skills/component-standards/SKILL.
 
 A responsive landing page for "Luma", a learning platform.
 **Next.js (App Router)**, **TypeScript** and **Tailwind CSS**.
+
+**Live demo:** https://buzzvel-luma.vercel.app/
 
 ### Getting started
 
