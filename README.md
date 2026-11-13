@@ -1,160 +1,11 @@
-# Luma — Desafio Front-End Buzzvel (novembro de 2026)
-
-**Idiomas:** [Português](#português) · [English](#english)
-
-## Português
-
-Uma landing page responsiva para a "Luma", uma plataforma de ensino.
-**Next.js (App Router)**, **TypeScript** e **Tailwind CSS**.
-
-**Demo publicada:** https://buzzvel-luma.vercel.app/
-
-### Como rodar
-
-Desenvolvido e testado em Node.js 22.
-
-```bash
-npm install
-npm run dev        # http://localhost:3000
-```
-
-| Script              | O que faz                                        |
-| ------------------- | ------------------------------------------------ |
-| `npm run dev`       | Servidor de desenvolvimento                      |
-| `npm run build`     | Build de produção (a página é totalmente estática) |
-| `npm run start`     | Serve o build de produção                        |
-| `npm run lint`      | ESLint                                           |
-| `npm run typecheck` | TypeScript, sem emitir arquivos                  |
-| `npm test`          | Testes unitários e de componente (Vitest)        |
-
-### Estrutura do projeto
-
-A página é dividida em módulos independentes, um por seção do design. O `app/page.tsx` apenas os compõe.
-
-```
-src/
-  app/                 layout (fontes, metadata) e composição da página
-  theme/               design tokens em TypeScript: cores, tipografia, sombras, padrões base
-  modules/
-    site-header/       cada módulo tem o componente da seção,
-    hero/              seus subcomponentes, seus dados locais tipados
-    categories/        e seus tipos, e expõe um único ponto
-    featured-course/   de entrada pelo index.ts
-    how-it-works/
-    testimonial/
-    community/
-    contact/           components/ + lib/ (validação, envio simulado, testes)
-    final-cta/
-    site-footer/
-  shared/
-    ui/                Button, Container, Section, Eyebrow, AvatarStack, ArrowIcon, ResponsiveText
-    lib/, config/      helper de classes, constantes do site
-```
-
-Regras seguidas: módulos nunca importam uns dos outros, apenas de `shared/`; o conteúdo fica no `data.ts` de cada módulo (dados simulados, sem CMS); tudo é Server Component, exceto as duas peças que precisam de estado — o menu mobile e o formulário de contato.
-
-### Principais decisões
-
-- **Tema em TypeScript.** `src/theme/` guarda o design system em módulos tipados: `colors.ts` (as variáveis de cor do Figma), `typography.ts` (fontes e os estilos de texto `Mobile/*` e `Desktop/*` como tokens, por exemplo `text-h1` e `text-h1-lg`), `shadows.ts` e `base.ts` (padrões do site — fundo, anel de foco, rolagem suave, movimento reduzido — registrados como plugin do Tailwind e compostos a partir de utilitários). O `tailwind.config.ts` reúne tudo. A única folha de estilo é o `app/globals.css`, de duas linhas, que o Tailwind v4 exige como ponto de entrada (`@import "tailwindcss"` e `@config`).
-- **Classes com `clsx` e `tailwind-merge`.** O helper `cn()` resolve classes condicionais e conflitos entre utilitários, e conhece os tokens do tema, de modo que um `className` recebido por um componente substitui o padrão correspondente.
-- **Breakpoints.** O arquivo tem um frame mobile de 402px e um desktop de 1280px, sem frame de tablet. O layout mobile vale abaixo de `lg` (1024px) e o desktop a partir de `lg`. No intervalo fiz estas escolhas: o cabeçalho mostra a navegação completa a partir de `md`, os cards de categoria passam a duas colunas a partir de `sm`, os passos passam a três colunas a partir de `md`, e os pares de botões ficam lado a lado a partir de `sm`.
-- **Largura do conteúdo.** O conteúdo é limitado à coluna de 1120px do frame desktop e centralizado em telas maiores; os fundos ocupam a largura toda.
-- **Mosaico de fotos.** A colagem é dimensionada em unidades de container query (`cqw`) tiradas das medidas do Figma, então escala como uma peça única em qualquer largura, com medidas separadas para mobile e desktop porque os dois frames recortam as fotos de forma diferente.
-- **Formas do CTA final.** São ancoradas à borda mais próxima ou ao centro para que a composição se mantenha em qualquer largura, e ficam ocultas abaixo de `lg`, como no frame mobile.
-- **Cabeçalho fixo.** O design não define; deixei-o sticky para que a navegação fique acessível numa página longa, com scroll padding para que as âncoras não fiquem escondidas atrás dele.
-
-#### Diferenças de design entre mobile e web
-
-Os dois frames do Figma não são idênticos em conteúdo. Implementei cada largura exatamente como o seu frame (mobile abaixo de `lg`, desktop a partir de `lg`), sem unificar nada, e registro aqui o que notei. Não sei se estas diferenças são intencionais; se não forem, cada uma se corrige em uma linha de `data.ts`.
-
-| Onde | Mobile (402px) | Desktop (1280px) | Era para ser diferente? |
-| --- | --- | --- | --- |
-| How it works — rótulo dos passos | "Step 01", "Step 02", "Step 03" | "Step 01" nos três passos | Parece um texto não atualizado no desktop |
-| How it works — texto do passo 2 | "…professionals who actually use these skills." | "…professionals who use these skills." | Não está claro qual é a versão final |
-| How it works — ícone do passo 2 | Quadrado em laranja `#ff704d` a 15% de opacidade | Quadrado em pêssego `#ffcb9f` | Cores parecidas, mas valores diferentes |
-| Contact — formulário | Descrição, rótulos, placeholders e botão em português ("Nome completo", "Enviar mensagem"…); o título "Contact us" está em inglês | Tudo em inglês | Parece um frame não traduzido, já que o resto da página está em inglês |
-
-Como isso foi implementado: um componente `ResponsiveText` renderiza os dois textos e o CSS mostra o do breakpoint atual, sem JavaScript e sem salto na hidratação. Os trechos em português levam `lang="pt"` para leitores de tela. As mensagens de erro e de sucesso do formulário, que o design não define, ficam em inglês nas duas larguras.
-
-#### O que o design não define
-
-| No arquivo Figma | O que fiz |
-| --- | --- |
-| Não há estado aberto para o menu mobile | Um painel abaixo do cabeçalho, reutilizando o fundo do cabeçalho e os estilos de botão |
-| Não há estados de hover, foco, erro ou sucesso | Adicionei hovers discretos, um anel de foco visível, erros junto aos campos e uma mensagem de sucesso |
-| O parágrafo de "The people" é lorem ipsum | Mantido como no design |
-| Os destinos da navegação e dos botões não são especificados | Só navegam os links cujo nome corresponde a uma seção que existe na página (Courses, Community, Explore courses, See how it works, Browse all courses, Explore all courses, Categories, Contact, o logo e o e-mail). Os demais — Log in, Start learning, For Teams, About, os cards de categoria, View course, Explore teachers and students, Join Luma e os outros links do rodapé — levariam a páginas que não existem, então ficam sem função: são `<a>` sem `href`, não fazem nada ao clicar e ficam fora da ordem de Tab |
-| Quatro cores de texto medem 4,45:1 contra o fundo | Único ponto em que me afastei do Figma: usei a cor mais escura seguinte da paleta para cumprir WCAG AA (rótulos dos passos, valor de "Response time", "Browse all courses", placeholders do formulário) |
-
-### Interações
-
-- **Menu mobile:** um botão de disclosure com `aria-expanded`/`aria-controls`; fecha com Escape (o foco volta ao botão), ao escolher um link e quando a tela chega ao layout desktop.
-- **Formulário de contato:** validação em código (campos obrigatórios, formato de e-mail, tamanho mínimo da mensagem), erros associados com `aria-describedby`, foco levado ao primeiro campo inválido, e um envio simulado (`lib/submitContactForm.ts`) com estado de carregamento e mensagem de sucesso anunciada por `role="status"`. Nada é enviado a lugar nenhum.
-- **Navegação na página:** rolagem suave, desativada com `prefers-reduced-motion`, assim como todas as transições.
-
-### Acessibilidade e performance
-
-- Landmarks (`header`, `nav`, `main`, `footer`), um único `h1`, seções rotuladas, listas para conteúdo repetido, `figure`/`blockquote` para o depoimento, `dl` para as estatísticas, um skip link.
-- Fotos com significado têm descrição; imagens e formas decorativas têm `alt` vazio ou `aria-hidden`.
-- As imagens passam pelo `next/image` com `sizes`; a foto do hero é pré-carregada com prioridade alta e as demais são lazy. As fontes são servidas pelo próprio site via `next/font`, limitadas aos pesos que o design usa.
-- Apenas o menu e o formulário enviam JavaScript próprio para o cliente.
-
-### Testes
-
-```bash
-npm test          # roda os 24 testes uma vez
-npx vitest        # modo watch
-```
-
-**Critério.** Testei o código que tem comportamento — estado, ramificações, regras — e não o que é apenas marcação. Um teste só entra se puder falhar por um motivo que um usuário perceberia.
-
-**O que é testado e por quê**
-
-| Alvo | Testes | Por que este |
-| --- | --- | --- |
-| `contact/lib/validation.ts` | 8 | É a única regra de negócio da página (campos obrigatórios, formato de e-mail, tamanho mínimo). É uma função pura, com várias ramificações e casos de borda (entrada só com espaços, e-mails malformados), fácil de quebrar ao alterar uma regra. |
-| `contact/components/ContactForm.tsx` | 6 | É um dos dois Client Components e o que tem mais estados: ocioso, com erros, enviando, sucesso. Os testes cobrem o que a validação sozinha não garante: o erro aparece associado ao campo (`aria-invalid`, `aria-describedby`), o foco vai para o primeiro campo inválido, o erro some ao editar, o botão fica desabilitado durante o envio e o sucesso é anunciado em `role="status"`. Um teste confirma que os textos em português do frame mobile estão marcados com `lang="pt"`. |
-| `site-header/components/MobileMenu.tsx` | 6 | É o outro Client Component e a única navegação em telas pequenas: se quebrar, o site fica sem menu no mobile. Os testes cobrem abrir e fechar, `aria-expanded`/`aria-controls`, uso só por teclado, Escape devolvendo o foco ao botão, o fechamento ao escolher um link e que as ações sem destino ficam fora da ordem de Tab. |
-| `shared/lib/cn.ts` | 4 | É usado por todos os componentes compartilhados. O `tailwind-merge` não conhece os tokens do tema por padrão; sem a configuração, `text-h1` (tamanho) e `text-ink` (cor) poderiam se anular. Os testes travam essa configuração. |
-
-**O que não é testado e por quê**
-
-- **Seções estáticas** (Hero, Categories, Featured course, How it works, Testimonial, Community, Final CTA, Footer): são Server Components sem estado nem lógica, que só renderizam os dados de `data.ts`. Um teste ali apenas repetiria a marcação e quebraria a cada ajuste de texto, sem pegar defeito real. A correção delas é visual, e foi verificada comparando capturas de tela com o Figma.
-- **Primitivos de UI** (`Button`, `Container`, `Section`, `Eyebrow`…): sem lógica além de escolher classes; essa parte está coberta pelos testes do `cn()` e, indiretamente, pelos testes do formulário e do menu, que usam o `Button`.
-- **Layout responsivo e aparência**: o jsdom não calcula layout nem aplica CSS, então testes unitários não conseguem verificar isso. Foi conferido em navegador real (ver "Como foi verificado").
-- **`submitContactForm`**: é um envio simulado com um atraso fixo; nos testes do formulário ele é substituído por um mock.
-
-**Como os testes são escritos.** Vitest com Testing Library em jsdom. Os componentes são usados como um usuário os usaria — encontrados por rótulo e papel (`getByLabelText`, `getByRole`), operados com clique e teclado — e não por classes ou estado interno. Assim os testes também funcionam como verificação de acessibilidade: se um campo perder o `label` ou o botão perder o nome, o teste falha. Conferi que eles detectam regressões removendo de propósito as chamadas de foco do formulário e do menu: 3 testes falharam, e o código foi restaurado.
-
-### Como foi verificado
-
-- `npm run lint`, `npm run typecheck`, `npm test` (24 testes) e `npm run build` passam.
-- Após finalização da tela foi conferido de perto o design para verificar se chegamos ao design do figma.
-- Lighthouse no build de produção local: 98 em performance no preset mobile e 100 no desktop; 100 em acessibilidade, 100 em boas práticas e 100 em SEO nos dois.
-
-### Ferramentas de IA
-
-Construído com o **Claude Code** (Anthropic), conectado ao Figma pelo **servidor MCP oficial do Figma**, que forneceu a estrutura dos frames, as medidas, as variáveis de design e os assets exportados.
-
-Eu defini a direção e a padronização de como os componentes devem ser construídos: arquitetura modular com um módulo por seção, Server Components por padrão, conteúdo tipado fora do JSX, tema em TypeScript consumido por tokens do Tailwind, classes montadas com `clsx` e `tailwind-merge`, código sem comentários, HTML semântico com uso completo por teclado, e o critério do que merece teste. O Claude Code escreveu o código seguindo essas definições, e eu revisei o resultado.
-
-Esses padrões estão registrados em [`.claude/skills/component-standards/SKILL.md`](.claude/skills/component-standards/SKILL.md), um arquivo de skill que o Claude Code carrega antes de criar ou alterar qualquer componente, para que o que for feito daqui em diante siga as mesmas regras.
-
-### Tempo gasto
-
-- Aproximadamente 1 hora de implementação e verificação assistidas por IA.
-- Aproximadamente 1 hora de validação da tela, testes de todas as funcionalidades e conferência de que o padrão de código definido foi seguido.
-
----
-
-## English
+# Luma — Buzzvel Front-End challenge (November 2026)
 
 A responsive landing page for "Luma", a learning platform.
 **Next.js (App Router)**, **TypeScript** and **Tailwind CSS**.
 
 **Live demo:** https://buzzvel-luma.vercel.app/
 
-### Getting started
+## Getting started
 
 Developed and tested on Node.js 22.
 
@@ -172,7 +23,7 @@ npm run dev        # http://localhost:3000
 | `npm run typecheck` | TypeScript, no emit                        |
 | `npm test`          | Unit and component tests (Vitest)          |
 
-### Project structure
+## Project structure
 
 The page is split into self-contained modules, one per section of the design. `app/page.tsx` only composes them.
 
@@ -198,7 +49,7 @@ src/
 
 Rules followed: modules never import from each other, only from `shared/`; content lives in each module's `data.ts` (mock data, no CMS); everything is a Server Component except the two pieces that need state — the mobile menu and the contact form.
 
-### Key decisions
+## Key decisions
 
 - **Theme in TypeScript.** `src/theme/` holds the design system as typed modules: `colors.ts` (the Figma colour variables), `typography.ts` (fonts and the `Mobile/*` and `Desktop/*` text styles as tokens such as `text-h1` and `text-h1-lg`), `shadows.ts` and `base.ts` (site-wide defaults — surface, focus ring, smooth scrolling, reduced motion — registered as a Tailwind plugin and composed from utilities). `tailwind.config.ts` assembles them. The only stylesheet is the two-line `app/globals.css` that Tailwind v4 needs as its entry point (`@import "tailwindcss"` and `@config`).
 - **Class names with `clsx` and `tailwind-merge`.** The `cn()` helper resolves conditional classes and conflicts between utilities, and knows the theme tokens, so a `className` passed to a component replaces the matching default.
@@ -208,7 +59,7 @@ Rules followed: modules never import from each other, only from `shared/`; conte
 - **Final CTA shapes.** They are anchored to the nearest edge or to the centre so the composition holds at any width, and hidden below `lg`, as in the mobile frame.
 - **Sticky header.** The design does not say; I made it sticky so navigation stays reachable on a long page, with scroll padding so anchors are not hidden under it.
 
-#### Design differences between mobile and web
+### Design differences between mobile and web
 
 The two Figma frames are not identical in content. I implemented each width exactly as its frame (mobile below `lg`, desktop from `lg` up), without unifying anything, and I list here what I noticed. I do not know whether these differences are intentional; if they are not, each one is a one-line fix in `data.ts`.
 
@@ -221,7 +72,7 @@ The two Figma frames are not identical in content. I implemented each width exac
 
 How this is implemented: a `ResponsiveText` component renders both texts and CSS shows the one for the current breakpoint, with no JavaScript and no hydration jump. The Portuguese strings carry `lang="pt"` for screen readers. The form's error and success messages, which the design does not define, stay in English at both widths.
 
-#### What the design does not define
+### What the design does not define
 
 | In the Figma file | What I did |
 | --- | --- |
@@ -231,20 +82,20 @@ How this is implemented: a `ResponsiveText` component renders both texts and CSS
 | Navigation and button destinations are not specified | Only links whose name matches a section that exists on the page navigate (Courses, Community, Explore courses, See how it works, Browse all courses, Explore all courses, Categories, Contact, the logo and the email). The rest — Log in, Start learning, For Teams, About, the category cards, View course, Explore teachers and students, Join Luma and the other footer links — would lead to pages that do not exist, so they have no function: they are `<a>` without `href`, do nothing on click and stay out of the Tab order |
 | Four text colours measure 4.45:1 against their background | The only place I departed from Figma: used the next darker palette colour to meet WCAG AA (step labels, "Response time" value, "Browse all courses", form placeholders) |
 
-### Interactions
+## Interactions
 
 - **Mobile menu:** a disclosure button with `aria-expanded`/`aria-controls`; closes on Escape (focus returns to the button), on link selection and when the viewport reaches the desktop layout.
 - **Contact form:** validation in code (required fields, email format, minimum message length), errors linked with `aria-describedby`, focus moved to the first invalid field, and a mocked submission (`lib/submitContactForm.ts`) with a pending state and a success message announced through `role="status"`. Nothing is sent anywhere.
 - **In-page navigation:** smooth scrolling, disabled under `prefers-reduced-motion`, as are all transitions.
 
-### Accessibility and performance
+## Accessibility and performance
 
 - Landmarks (`header`, `nav`, `main`, `footer`), one `h1`, labelled sections, lists for repeated content, `figure`/`blockquote` for the quote, `dl` for the stats, a skip link.
 - Meaningful photos have descriptions; decorative images and shapes have empty `alt` or `aria-hidden`.
 - Images go through `next/image` with `sizes`; the hero photo is preloaded with high fetch priority and the rest are lazy. Fonts are self-hosted by `next/font`, limited to the weights the design uses.
 - Only the menu and the form ship client-side JavaScript of their own.
 
-### Tests
+## Tests
 
 ```bash
 npm test          # runs the 24 tests once
@@ -271,13 +122,13 @@ npx vitest        # watch mode
 
 **How the tests are written.** Vitest with Testing Library in jsdom. Components are used the way a user would use them — found by label and role (`getByLabelText`, `getByRole`), operated with clicks and the keyboard — and not through classes or internal state. That makes the tests double as an accessibility check: if a field loses its `label` or the button loses its name, the test fails. I confirmed they detect regressions by deliberately removing the focus calls from the form and the menu: 3 tests failed, and the code was restored.
 
-### How it was checked
+## How it was checked
 
 - `npm run lint`, `npm run typecheck`, `npm test` (24 tests) and `npm run build` all pass.
 - Once the page was finished, the design was checked closely to confirm that it matches the Figma design.
 - Lighthouse on the local production build: 98 performance on the mobile preset and 100 on desktop; 100 accessibility, 100 best practices and 100 SEO on both.
 
-### AI tools
+## AI tools
 
 Built with **Claude Code** (Anthropic), connected to Figma through the official **Figma MCP server**, which supplied the frame structure, measurements, design variables and exported assets.
 
@@ -285,7 +136,7 @@ I defined the direction and the standards for how components must be built: a mo
 
 Those standards are recorded in [`.claude/skills/component-standards/SKILL.md`](.claude/skills/component-standards/SKILL.md), a skill file that Claude Code loads before creating or changing any component, so that further work follows the same rules.
 
-### Time spent
+## Time spent
 
 - Approximately 1 hour of AI-assisted implementation and verification.
 - Approximately 1 hour validating the page, testing every feature and checking that the defined code standards were followed.
