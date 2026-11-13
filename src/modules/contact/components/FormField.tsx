@@ -1,13 +1,12 @@
 import type { ChangeEvent } from "react";
 import { cn } from "@/shared/lib/cn";
-import { ResponsiveText, type ResponsiveCopy } from "@/shared/ui";
 
 type FormFieldProps = {
   id: string;
   name: string;
-  label: ResponsiveCopy;
+  label: string;
   value: string;
-  placeholder: ResponsiveCopy;
+  placeholder: string;
   error?: string;
   onChange: (value: string) => void;
   type?: "text" | "email";
@@ -16,7 +15,7 @@ type FormFieldProps = {
 };
 
 const controlClasses =
-  "peer block w-full scroll-mt-28 rounded-lg border bg-cream px-4 py-[11px] text-body text-ink placeholder:text-ink-tertiary transition-colors duration-200 focus:border-brand";
+  "block w-full scroll-mt-28 rounded-lg border bg-cream px-4 py-[11px] text-body text-ink placeholder:text-ink-tertiary transition-colors duration-200 focus:border-brand";
 
 export function FormField({
   id,
@@ -35,7 +34,7 @@ export function FormField({
     id,
     name,
     value,
-    placeholder: " ",
+    placeholder,
     autoComplete,
     required: true,
     "aria-invalid": error ? true : undefined,
@@ -48,25 +47,17 @@ export function FormField({
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="text-body font-bold text-ink">
-        <ResponsiveText text={label} />
+        {label}
       </label>
-      <div className="relative">
-        {multiline ? (
-          <textarea
-            {...shared}
-            rows={4}
-            className={cn(shared.className, "h-25 resize-y lg:h-30")}
-          />
-        ) : (
-          <input {...shared} type={type} />
-        )}
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-[17px] top-3 truncate text-body text-ink-secondary peer-[:not(:placeholder-shown)]:hidden"
-        >
-          <ResponsiveText text={placeholder} />
-        </span>
-      </div>
+      {multiline ? (
+        <textarea
+          {...shared}
+          rows={4}
+          className={cn(shared.className, "h-25 resize-y lg:h-30")}
+        />
+      ) : (
+        <input {...shared} type={type} />
+      )}
       {error && (
         <p id={errorId} className="text-body text-danger">
           {error}

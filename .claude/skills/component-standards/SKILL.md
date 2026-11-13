@@ -47,7 +47,7 @@ Follow these rules for every change under `src/`. They describe how the existing
 
 - Mobile first. The mobile frame (402px) applies below `lg` (1024px); the desktop frame (1280px) applies from `lg` up.
 - Sections use `Section` for vertical rhythm and `Container` for the content column. Do not re-declare page padding inside a module.
-- Follow each Figma frame as drawn. When the two frames differ in copy, render both with `ResponsiveText` (`{ mobile, desktop, mobileLang? }` in `data.ts`) instead of picking one, and record the difference in the README section "Design differences between mobile and web".
+- Where the mobile and desktop frames disagree in content (copy, language, colour), choose one version, use it at every width, and record the choice and the reason in the README section "Design differences between mobile and web". Do not ship two versions of the same text.
 - No horizontal overflow from 320px up.
 
 ## 5. Accessibility

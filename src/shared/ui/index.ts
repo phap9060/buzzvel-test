@@ -4,4 +4,3 @@ export { Button, type ActionLink, type ButtonProps } from "./Button";
 export { Container } from "./Container";
 export { Eyebrow } from "./Eyebrow";
 export { Section } from "./Section";
-export { ResponsiveText, type ResponsiveCopy } from "./ResponsiveText";

@@ -43,7 +43,7 @@ src/
     final-cta/
     site-footer/
   shared/
-    ui/                Button, Container, Section, Eyebrow, AvatarStack, ArrowIcon, ResponsiveText
+    ui/                Button, Container, Section, Eyebrow, AvatarStack, ArrowIcon
     lib/, config/      class-name helper, site-wide constants
 ```
 
@@ -61,16 +61,14 @@ Rules followed: modules never import from each other, only from `shared/`; conte
 
 ### Design differences between mobile and web
 
-The two Figma frames are not identical in content. I implemented each width exactly as its frame (mobile below `lg`, desktop from `lg` up), without unifying anything, and I list here what I noticed. I do not know whether these differences are intentional; if they are not, each one is a one-line fix in `data.ts`.
+The two Figma frames are not identical in content. Where they disagree I chose one version and used it at every width.
 
-| Where | Mobile (402px) | Desktop (1280px) | Was it meant to differ? |
-| --- | --- | --- | --- |
-| How it works — step labels | "Step 01", "Step 02", "Step 03" | "Step 01" on all three steps | Looks like text that was not updated on desktop |
-| How it works — step 2 copy | "…professionals who actually use these skills." | "…professionals who use these skills." | Unclear which is the final version |
-| How it works — step 2 icon | Square in orange `#ff704d` at 15% opacity | Square in peach `#ffcb9f` | Similar colours, different values |
-| Contact — form | Description, labels, placeholders and button in Portuguese ("Nome completo", "Enviar mensagem"…); the "Contact us" title is in English | All in English | Looks like an untranslated frame, since the rest of the page is in English |
-
-How this is implemented: a `ResponsiveText` component renders both texts and CSS shows the one for the current breakpoint, with no JavaScript and no hydration jump. The Portuguese strings carry `lang="pt"` for screen readers. The form's error and success messages, which the design does not define, stay in English at both widths.
+| What differs in Figma | What I chose | Why |
+| --- | --- | --- |
+| Step labels: "Step 01" on all three steps on desktop; "Step 01", "Step 02", "Step 03" on mobile | 01, 02, 03, derived from the list order | The desktop text looks like a copy that was not updated |
+| Contact form: English on desktop; description, labels, placeholders and button in Portuguese on mobile | English | The rest of the page, including the form title, is in English |
+| Step 2 copy: "…who use these skills." on desktop; "…who actually use these skills." on mobile | The desktop sentence | Neither is wrong; one version is enough, and I took the desktop frame as the reference |
+| Step 2 icon: peach `#ffcb9f` on desktop; orange `#ff704d` at 15% opacity on mobile | The desktop peach | It is a solid palette colour; the mobile value is a one-off transparency |
 
 ### What the design does not define
 
@@ -80,7 +78,7 @@ How this is implemented: a `ResponsiveText` component renders both texts and CSS
 | No hover, focus, error or success states | Added restrained hover states, a visible focus ring, inline field errors and a success message |
 | "The people" paragraph is lorem ipsum | Kept as designed |
 | Navigation and button destinations are not specified | Only links whose name matches a section that exists on the page navigate (Courses, Community, Explore courses, See how it works, Browse all courses, Explore all courses, Categories, Contact, the logo and the email). The rest — Log in, Start learning, For Teams, About, the category cards, View course, Explore teachers and students, Join Luma and the other footer links — would lead to pages that do not exist, so they have no function: they are `<a>` without `href`, do nothing on click and stay out of the Tab order |
-| Four text colours measure 4.45:1 against their background | The only place I departed from Figma: used the next darker palette colour to meet WCAG AA (step labels, "Response time" value, "Browse all courses", form placeholders) |
+| Three text colours measure 4.45:1 against their background | Used the next darker palette colour to meet WCAG AA (step labels, "Response time" value, "Browse all courses") |
 
 ## Interactions
 
@@ -98,7 +96,7 @@ How this is implemented: a `ResponsiveText` component renders both texts and CSS
 ## Tests
 
 ```bash
-npm test          # runs the 24 tests once
+npm test          # runs the 23 tests once
 npx vitest        # watch mode
 ```
 
@@ -109,7 +107,7 @@ npx vitest        # watch mode
 | Target | Tests | Why this one |
 | --- | --- | --- |
 | `contact/lib/validation.ts` | 8 | It is the only business rule on the page (required fields, email format, minimum length). It is a pure function with several branches and edge cases (whitespace-only input, malformed emails), easy to break when a rule changes. |
-| `contact/components/ContactForm.tsx` | 6 | It is one of the two Client Components and the one with the most states: idle, with errors, submitting, success. The tests cover what validation alone does not guarantee: the error is tied to its field (`aria-invalid`, `aria-describedby`), focus moves to the first invalid field, the error clears on edit, the button is disabled while submitting, and success is announced through `role="status"`. One test confirms that the Portuguese copy of the mobile frame is marked with `lang="pt"`. |
+| `contact/components/ContactForm.tsx` | 5 | It is one of the two Client Components and the one with the most states: idle, with errors, submitting, success. The tests cover what validation alone does not guarantee: the error is tied to its field (`aria-invalid`, `aria-describedby`), focus moves to the first invalid field, the error clears on edit, the button is disabled while submitting, and success is announced through `role="status"`. |
 | `site-header/components/MobileMenu.tsx` | 6 | It is the other Client Component and the only navigation on small screens: if it breaks, the site has no menu on mobile. The tests cover opening and closing, `aria-expanded`/`aria-controls`, keyboard-only use, Escape returning focus to the button, closing when a link is chosen, and actions without a destination staying out of the Tab order. |
 | `shared/lib/cn.ts` | 4 | Every shared component uses it. `tailwind-merge` does not know the theme tokens by default; without the configuration, `text-h1` (size) and `text-ink` (colour) could cancel each other. The tests lock that configuration in. |
 
@@ -124,7 +122,7 @@ npx vitest        # watch mode
 
 ## How it was checked
 
-- `npm run lint`, `npm run typecheck`, `npm test` (24 tests) and `npm run build` all pass.
+- `npm run lint`, `npm run typecheck`, `npm test` (23 tests) and `npm run build` all pass.
 - Once the page was finished, the design was checked closely to confirm that it matches the Figma design.
 - Lighthouse on the local production build: 98 performance on the mobile preset and 100 on desktop; 100 accessibility, 100 best practices and 100 SEO on both.
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Button, ResponsiveText, type ResponsiveCopy } from "@/shared/ui";
+import { Button } from "@/shared/ui";
 import { submitContactForm } from "../lib/submitContactForm";
 import {
   EMPTY_VALUES,
@@ -11,15 +11,13 @@ import {
 } from "../lib/validation";
 import type {
   ContactFieldName,
-  ContactFormCopy,
   ContactFormErrors,
   ContactFormValues,
 } from "../types";
 import { FormField } from "./FormField";
 
 type ContactFormProps = {
-  fields: ContactFormCopy;
-  submitLabel: ResponsiveCopy;
+  submitLabel: string;
   submittingLabel: string;
   successMessage: string;
 };
@@ -27,7 +25,6 @@ type ContactFormProps = {
 type FormStatus = "idle" | "submitting" | "success";
 
 export function ContactForm({
-  fields,
   submitLabel,
   submittingLabel,
   successMessage,
@@ -68,8 +65,8 @@ export function ContactForm({
         <FormField
           id="contact-name"
           name="name"
-          label={fields.name.label}
-          placeholder={fields.name.placeholder}
+          label="Full name"
+          placeholder="Your name"
           autoComplete="name"
           value={values.name}
           error={errors.name}
@@ -79,8 +76,8 @@ export function ContactForm({
           id="contact-email"
           name="email"
           type="email"
-          label={fields.email.label}
-          placeholder={fields.email.placeholder}
+          label="Email"
+          placeholder="youremail@example.com"
           autoComplete="email"
           value={values.email}
           error={errors.email}
@@ -89,8 +86,8 @@ export function ContactForm({
         <FormField
           id="contact-message"
           name="message"
-          label={fields.message.label}
-          placeholder={fields.message.placeholder}
+          label="Your question"
+          placeholder="Tell us how we can help..."
           multiline
           value={values.message}
           error={errors.message}
@@ -99,11 +96,7 @@ export function ContactForm({
       </div>
 
       <Button type="submit" fullWidth disabled={status === "submitting"}>
-        {status === "submitting" ? (
-          submittingLabel
-        ) : (
-          <ResponsiveText text={submitLabel} />
-        )}
+        {status === "submitting" ? submittingLabel : submitLabel}
       </Button>
 
       <p role="status" className="text-body font-bold text-ink empty:hidden">

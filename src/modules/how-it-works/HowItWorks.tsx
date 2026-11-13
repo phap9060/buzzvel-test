@@ -1,4 +1,4 @@
-import { Container, Eyebrow, ResponsiveText, Section } from "@/shared/ui";
+import { Container, Eyebrow, Section } from "@/shared/ui";
 import { StepIcon } from "./components/StepIcon";
 import { howItWorksContent, steps } from "./data";
 
@@ -31,13 +31,14 @@ export function HowItWorks() {
               >
                 <StepIcon variant={step.icon} />
                 <p className="mt-6 text-overline uppercase text-ink-secondary">
-                  <ResponsiveText text={step.label} />
+                  {howItWorksContent.stepLabel}{" "}
+                  {String(index + 1).padStart(2, "0")}
                 </p>
                 <h3 className="mt-2 font-display text-h5 lg:text-h5-lg text-ink">
                   {step.title}
                 </h3>
                 <p className="mt-3 text-subtitle-2 lg:text-subtitle-2-lg text-ink-secondary">
-                  <ResponsiveText text={step.description} />
+                  {step.description}
                 </p>
                 {index < steps.length - 1 && (
                   <span
