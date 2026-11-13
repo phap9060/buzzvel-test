@@ -32,23 +32,23 @@ src/
   app/                 layout (fonts, metadata) and page composition
   theme/               design tokens in TypeScript: colours, typography, shadows, base defaults
   modules/
-    site_header/       each module owns its section component,
+    site-header/       each module owns its section component,
     hero/              its sub-components, its typed local data
     categories/        and its types, and exposes one entry
-    featured_course/   point through index.ts
-    how_it_works/
+    featured-course/   point through index.ts
+    how-it-works/
     testimonial/
     community/
     contact/           components/ + lib/ (validation, mock submit, tests)
-    final_cta/
-    site_footer/
+    final-cta/
+    site-footer/
   shared/
     ui/                one folder per component (Button, Container, Section, Eyebrow,
                        AvatarStack, ArrowIcon): component, types and index.ts
     lib/, config/      class-name helper, site-wide constants
 ```
 
-Each component keeps its props and related types in a file of its own next to it (`Button.tsx` and `Button.types.ts`); shared components each live in their own folder (`shared/ui/button/`); folder names are snake_case; a module's `types.ts` holds the types of its data.
+Each component keeps its props and related types in a file of its own next to it (`Button.tsx` and `Button.types.ts`); shared components each live in their own folder (`shared/ui/button/`); folder names are kebab-case; a module's `types.ts` holds the types of its data.
 
 Rules followed: modules never import from each other, only from `shared/`; content lives in each module's `data.ts` (mock data, no CMS); everything is a Server Component except the two pieces that need state — the mobile menu and the contact form.
 
@@ -111,7 +111,7 @@ npx vitest        # watch mode
 | --- | --- | --- |
 | `contact/lib/validation.ts` | 8 | It is the only business rule on the page (required fields, email format, minimum length). It is a pure function with several branches and edge cases (whitespace-only input, malformed emails), easy to break when a rule changes. |
 | `contact/components/ContactForm.tsx` | 5 | It is one of the two Client Components and the one with the most states: idle, with errors, submitting, success. The tests cover what validation alone does not guarantee: the error is tied to its field (`aria-invalid`, `aria-describedby`), focus moves to the first invalid field, the error clears on edit, the button is disabled while submitting, and success is announced through `role="status"`. |
-| `site_header/components/MobileMenu.tsx` | 6 | It is the other Client Component and the only navigation on small screens: if it breaks, the site has no menu on mobile. The tests cover opening and closing, `aria-expanded`/`aria-controls`, keyboard-only use, Escape returning focus to the button, closing when a link is chosen, and actions without a destination staying out of the Tab order. |
+| `site-header/components/MobileMenu.tsx` | 6 | It is the other Client Component and the only navigation on small screens: if it breaks, the site has no menu on mobile. The tests cover opening and closing, `aria-expanded`/`aria-controls`, keyboard-only use, Escape returning focus to the button, closing when a link is chosen, and actions without a destination staying out of the Tab order. |
 | `shared/lib/cn.ts` | 4 | Every shared component uses it. `tailwind-merge` does not know the theme tokens by default; without the configuration, `text-h1` (size) and `text-ink` (colour) could cancel each other. The tests lock that configuration in. |
 
 **What is not tested, and why**

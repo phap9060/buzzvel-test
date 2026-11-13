@@ -21,10 +21,10 @@ Follow these rules for every change under `src/`. They describe how the existing
     index.ts          the only entry point: export { <Section> } from "./<Section>"
   ```
 
-- Folder names are snake_case (`site_header/`, `how_it_works/`, `avatar_stack/`). Component files are PascalCase (`MobileMenu.tsx`, `MobileMenu.types.ts`).
+- Folder names are kebab-case (`site-header/`, `how-it-works/`, `avatar-stack/`). Component files are PascalCase (`MobileMenu.tsx`, `MobileMenu.types.ts`).
 - A module never imports from another module. Anything used by two modules moves to `src/shared/` (`ui/`, `lib/`, `config/`).
 - `src/app/page.tsx` only composes modules. It holds no markup of its own beyond the skip link and `<main>`.
-- Each shared component lives in its own folder, `src/shared/ui/<name>/` (for example `avatar_stack/`), with `<Name>.tsx`, `<Name>.types.ts` and an `index.ts` that exports both; `src/shared/ui/index.ts` re-exports the public ones.
+- Each shared component lives in its own folder, `src/shared/ui/<name>/` (for example `avatar-stack/`), with `<Name>.tsx`, `<Name>.types.ts` and an `index.ts` that exports both; `src/shared/ui/index.ts` re-exports the public ones.
 - Import shared UI through the barrel: `import { Button, Container } from "@/shared/ui"`.
 
 ## 2. Components

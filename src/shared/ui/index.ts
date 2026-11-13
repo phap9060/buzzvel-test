@@ -1,5 +1,5 @@
-export { ArrowIcon } from "./arrow_icon";
-export { AvatarStack, type Avatar } from "./avatar_stack";
+export { ArrowIcon } from "./arrow-icon";
+export { AvatarStack, type Avatar } from "./avatar-stack";
 export { Button, type ActionLink, type ButtonProps } from "./button";
 export { Container } from "./container";
 export { Eyebrow } from "./eyebrow";
