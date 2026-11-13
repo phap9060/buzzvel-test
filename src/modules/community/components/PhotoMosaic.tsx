@@ -31,7 +31,7 @@ const responsiveVars = (
 
 export function PhotoMosaic({ columns, className }: PhotoMosaicProps) {
   return (
-    <div className={cn("@container w-full max-w-[520px]", className)}>
+    <div className={cn("@container w-full max-w-130", className)}>
       <div
         className="relative flex items-center justify-center gap-x-(--gap-x) lg:gap-x-(--gap-x-lg)"
         style={responsiveVars({

@@ -11,7 +11,7 @@ export function FeaturedCourse() {
     <Section id="featured-course" labelledBy={HEADING_ID} className="bg-brand">
       <Container className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-15">
         <div className="relative lg:min-w-0 lg:flex-1">
-          <div className="relative aspect-[362/280] overflow-hidden rounded-2xl lg:aspect-auto lg:h-[408px]">
+          <div className="relative aspect-362/280 overflow-hidden rounded-2xl lg:aspect-auto lg:h-102">
             <Image
               src={image.src}
               alt={image.alt}

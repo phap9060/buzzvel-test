@@ -8,7 +8,7 @@ export function Categories() {
   return (
     <Section id="courses" labelledBy={HEADING_ID} className="bg-white">
       <Container>
-        <div className="max-w-[560px]">
+        <div className="max-w-140">
           <Eyebrow>{categoriesContent.eyebrow}</Eyebrow>
           <h2
             id={HEADING_ID}
