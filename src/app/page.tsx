@@ -1,12 +1,12 @@
 import { Categories } from "@/modules/categories";
 import { Community } from "@/modules/community";
 import { Contact } from "@/modules/contact";
-import { FeaturedCourse } from "@/modules/featured-course";
-import { FinalCta } from "@/modules/final-cta";
+import { FeaturedCourse } from "@/modules/featured_course";
+import { FinalCta } from "@/modules/final_cta";
 import { Hero } from "@/modules/hero";
-import { HowItWorks } from "@/modules/how-it-works";
-import { SiteFooter } from "@/modules/site-footer";
-import { SiteHeader } from "@/modules/site-header";
+import { HowItWorks } from "@/modules/how_it_works";
+import { SiteFooter } from "@/modules/site_footer";
+import { SiteHeader } from "@/modules/site_header";
 import { Testimonial } from "@/modules/testimonial";
 
 export default function Home() {
