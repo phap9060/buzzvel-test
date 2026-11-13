@@ -43,7 +43,7 @@ export function HowItWorks() {
                 {index < steps.length - 1 && (
                   <span
                     aria-hidden="true"
-                    className="absolute bottom-0 left-7 h-[50px] w-px bg-line md:hidden"
+                    className="absolute bottom-0 left-7 h-12.5 w-px bg-line md:hidden"
                   />
                 )}
               </li>

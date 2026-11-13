@@ -14,7 +14,7 @@ export function Testimonial() {
           What learners say
         </h2>
 
-        <figure className="lg:max-w-[600px] lg:flex-1">
+        <figure className="lg:max-w-150 lg:flex-1">
           <Image src="/icons/quote.svg" alt="" width={24} height={22} />
           <blockquote className="mt-4 font-display text-quote lg:text-quote-lg text-ink">
             <p>{quote}</p>
@@ -38,10 +38,10 @@ export function Testimonial() {
           </figcaption>
         </figure>
 
-        <dl className="grid grid-cols-3 gap-x-4 lg:w-[401px] lg:shrink-0 lg:grid-cols-1 lg:gap-[17px] lg:border-l lg:border-line lg:pl-12">
+        <dl className="grid grid-cols-3 gap-x-4 lg:w-100.25 lg:shrink-0 lg:grid-cols-1 lg:gap-4.25 lg:border-l lg:border-line lg:pl-12">
           {stats.map((stat) => (
             <div key={stat.label} className="flex flex-col-reverse justify-end">
-              <dt className="mt-1 max-w-[104px] text-body text-ink-tertiary lg:max-w-none">
+              <dt className="mt-1 max-w-26 text-body text-ink-tertiary lg:max-w-none">
                 {stat.label}
               </dt>
               <dd className="font-display text-stat lg:text-stat-lg text-brand">

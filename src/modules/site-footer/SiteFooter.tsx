@@ -6,10 +6,10 @@ export function SiteFooter() {
   return (
     <footer className="bg-ink pt-15 pb-5 lg:pt-20 lg:pb-10">
       <Container>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-[34px] lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-8 xl:grid-cols-[416px_208px_208px_1fr]">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-8.5 lg:grid-cols-[2fr_1fr_1fr_1fr] lg:gap-8 xl:grid-cols-[416px_208px_208px_1fr]">
           <div className="col-span-2 lg:col-span-1">
             <Image src="/logo-white.svg" alt="Luma" width={54} height={17} />
-            <p className="mt-3 text-body text-on-dark-tertiary lg:max-w-[240px]">
+            <p className="mt-3 text-body text-on-dark-tertiary lg:max-w-60">
               {footerContent.tagline}
             </p>
           </div>
@@ -41,7 +41,7 @@ export function SiteFooter() {
           })}
         </div>
 
-        <p className="mt-12 border-t border-ink-secondary pt-6 text-center text-[0.8125rem] leading-[1.5] text-on-dark-secondary lg:mt-16 lg:text-left">
+        <p className="mt-12 border-t border-ink-secondary pt-6 text-center text-[0.8125rem] leading-normal text-on-dark-secondary lg:mt-16 lg:text-left">
           {footerContent.copyright}
         </p>
       </Container>

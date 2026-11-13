@@ -15,7 +15,7 @@ type FormFieldProps = {
 };
 
 const controlClasses =
-  "block w-full scroll-mt-28 rounded-lg border bg-cream px-4 py-[11px] text-body text-ink placeholder:text-ink-tertiary transition-colors duration-200 focus:border-brand";
+  "block w-full scroll-mt-28 rounded-lg border bg-cream px-4 py-2.75 text-body text-ink placeholder:text-ink-tertiary transition-colors duration-200 focus:border-brand";
 
 export function FormField({
   id,

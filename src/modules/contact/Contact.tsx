@@ -12,7 +12,7 @@ export function Contact() {
   return (
     <Section id="contact" labelledBy={HEADING_ID} className="bg-white">
       <Container className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-15">
-        <div className="lg:w-[480px] lg:max-w-[45%]">
+        <div className="lg:w-120 lg:max-w-9/20">
           <Eyebrow>{contactContent.eyebrow}</Eyebrow>
           <h2
             id={HEADING_ID}
@@ -58,7 +58,7 @@ export function Contact() {
 
         <section
           aria-labelledby={FORM_HEADING_ID}
-          className="rounded-2xl border border-line bg-white p-[19px] shadow-card lg:w-[540px] lg:max-w-[50%] lg:shrink-0 lg:p-[39px]"
+          className="rounded-2xl border border-line bg-white p-4.75 shadow-card lg:w-135 lg:max-w-1/2 lg:shrink-0 lg:p-9.75"
         >
           <h3
             id={FORM_HEADING_ID}

@@ -21,7 +21,7 @@ export function Hero() {
           >
             {heroContent.title}
           </h1>
-          <p className="mt-6 max-w-[480px] text-subtitle-1 lg:text-subtitle-1-lg text-ink-secondary">
+          <p className="mt-6 max-w-120 text-subtitle-1 lg:text-subtitle-1-lg text-ink-secondary">
             {heroContent.description}
           </p>
 
@@ -43,15 +43,15 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="order-1 w-full px-2 lg:order-2 lg:w-[44%] lg:shrink-0 lg:px-0 xl:w-[500px]">
-          <div className="relative mx-auto aspect-[346/380] max-w-[500px] lg:aspect-[500/520]">
+        <div className="order-1 w-full px-2 lg:order-2 lg:w-11/25 lg:shrink-0 lg:px-0 xl:w-125">
+          <div className="relative mx-auto aspect-346/380 max-w-125 lg:aspect-500/520">
             <div
               aria-hidden="true"
-              className="absolute top-6 -right-[18px] bottom-3.5 w-[89px] rounded-2xl bg-peach lg:bottom-7 xl:-right-[39px]"
+              className="absolute top-6 -right-4.5 bottom-3.5 w-22.25 rounded-2xl bg-peach lg:bottom-7 xl:-right-9.75"
             />
             <div
               aria-hidden="true"
-              className="absolute bottom-3 -left-[18px] size-16 rounded-full bg-brand-soft xl:-left-[45px] xl:size-[106px]"
+              className="absolute bottom-3 -left-4.5 size-16 rounded-full bg-brand-soft xl:-left-11.25 xl:size-26.5"
             />
 
             <Image
@@ -64,14 +64,14 @@ export function Hero() {
               className="rounded-3xl bg-brand-soft object-cover"
             />
 
-            <p className="absolute top-1.5 -left-2 flex items-center gap-3 rounded-xl bg-white px-4 py-3 text-body text-ink shadow-badge lg:top-4 xl:-left-[22px]">
+            <p className="absolute top-1.5 -left-2 flex items-center gap-3 rounded-xl bg-white px-4 py-3 text-body text-ink shadow-badge lg:top-4 xl:-left-5.5">
               <span className="flex h-8 items-center rounded-lg bg-brand-soft px-1 font-bold text-brand">
                 {coursesBadge.value}
               </span>
               {coursesBadge.label}
             </p>
 
-            <p className="absolute -right-[19px] bottom-9 flex items-center gap-2 rounded-xl bg-white px-4 py-3 text-body text-ink shadow-badge xl:-right-[57px]">
+            <p className="absolute -right-4.75 bottom-9 flex items-center gap-2 rounded-xl bg-white px-4 py-3 text-body text-ink shadow-badge xl:-right-14.25">
               <span
                 role="img"
                 aria-label={`${rating.value} out of ${rating.max} stars`}
