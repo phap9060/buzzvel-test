@@ -1,11 +1,5 @@
 import { ArrowIcon } from "@/shared/ui";
-import type { Category } from "../types";
-
-type CategoryCardProps = {
-  category: Category;
-  position: number;
-  linkLabel: string;
-};
+import type { CategoryCardProps } from "./CategoryCard.types";
 
 export function CategoryCard({
   category,

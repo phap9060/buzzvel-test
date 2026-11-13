@@ -1,17 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/shared/lib/cn";
-
-export type Avatar = {
-  src: string;
-  alt: string;
-};
-
-type AvatarStackProps = {
-  avatars: readonly Avatar[];
-  size?: 32 | 40;
-  ringClassName?: string;
-  className?: string;
-};
+import type { AvatarStackProps } from "./AvatarStack.types";
 
 const sizeClasses = {
   32: "size-8",

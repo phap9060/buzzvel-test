@@ -1,8 +1,4 @@
-import type { StepIconVariant } from "../types";
-
-type StepIconProps = {
-  variant: StepIconVariant;
-};
+import type { StepIconProps } from "./StepIcon.types";
 
 export function StepIcon({ variant }: StepIconProps) {
   if (variant === "focus") {

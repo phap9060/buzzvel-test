@@ -1,12 +1,5 @@
-import type { ReactNode } from "react";
 import { cn } from "@/shared/lib/cn";
-
-type SectionProps = {
-  id?: string;
-  labelledBy: string;
-  children: ReactNode;
-  className?: string;
-};
+import type { SectionProps } from "./Section.types";
 
 export function Section({ id, labelledBy, children, className }: SectionProps) {
   return (

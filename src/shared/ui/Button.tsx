@@ -1,33 +1,6 @@
-import type { ComponentPropsWithoutRef, ReactNode } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/shared/lib/cn";
-
-type ButtonVariant = "primary" | "secondary" | "accent";
-type ButtonSize = "md" | "lg";
-
-type CommonProps = {
-  children: ReactNode;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  fullWidth?: boolean;
-  className?: string;
-};
-
-type ButtonAsLink = CommonProps &
-  Omit<ComponentPropsWithoutRef<"a">, keyof CommonProps | "href"> & {
-    href: string | undefined;
-  };
-
-type ButtonAsButton = CommonProps &
-  Omit<ComponentPropsWithoutRef<"button">, keyof CommonProps> & {
-    href?: never;
-  };
-
-export type ActionLink = {
-  label: string;
-  href?: string;
-};
-
-export type ButtonProps = ButtonAsLink | ButtonAsButton;
+import type { ButtonProps, ButtonSize, ButtonVariant } from "./Button.types";
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-brand text-white hover:bg-brand-strong",

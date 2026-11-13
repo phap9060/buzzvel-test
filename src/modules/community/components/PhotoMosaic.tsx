@@ -1,19 +1,16 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { cn } from "@/shared/lib/cn";
-import type { MosaicColumn } from "../types";
+import type {
+  FrameMeasures,
+  FrameName,
+  PhotoMosaicProps,
+} from "./PhotoMosaic.types";
 
-type PhotoMosaicProps = {
-  columns: readonly MosaicColumn[];
-  className?: string;
-};
-
-const FRAME = {
+const FRAME: Record<FrameName, FrameMeasures> = {
   mobile: { width: 362, gapX: 12, gapY: 8, circle: 330 },
   desktop: { width: 520, gapX: 16, gapY: 12.84, circle: 500 },
-} as const;
-
-type FrameName = keyof typeof FRAME;
+};
 
 const cqw = (px: number, frame: FrameName) =>
   `${((px / FRAME[frame].width) * 100).toFixed(3)}cqw`;

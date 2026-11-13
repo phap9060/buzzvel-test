@@ -14,7 +14,7 @@ Follow these rules for every change under `src/`. They describe how the existing
   ```
   <section>/
     <Section>.tsx     the section component
-    components/       sub-components used only by this section
+    components/       sub-components used only by this section, each with its <Name>.types.ts
     lib/              logic used only by this section (with its tests)
     data.ts           typed content (mock data, no CMS)
     types.ts          the module's types
@@ -29,7 +29,8 @@ Follow these rules for every change under `src/`. They describe how the existing
 
 - Server Component by default. Add `"use client"` only when the component needs state, effects or event handlers, and keep that component as small as possible (today: `MobileMenu` and `ContactForm`).
 - Named exports only: `export function Hero()`. No default exports outside `app/`.
-- Props are a `type <Name>Props` declared above the component. Variants are string unions mapped to classes with a `Record<Variant, string>`.
+- No types are declared inside a component file. Each component has a `<Name>.types.ts` next to it that exports `<Name>Props` and any related types (variants, sizes, states); the component imports them with `import type`. Types that describe a module's data stay in the module's `types.ts`.
+- Variants are string unions mapped to classes with a `Record<Variant, string>`.
 - Content never lives in JSX. Text, links and image paths come from the module's `data.ts`, typed in `types.ts`.
 - A component that renders a root element accepts `className` and merges it with `cn()` so the caller can override defaults.
 - No code comments. Names and structure must make the intent clear; decisions that need explaining go in the README.

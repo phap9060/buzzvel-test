@@ -15,14 +15,7 @@ import type {
   ContactFormValues,
 } from "../types";
 import { FormField } from "./FormField";
-
-type ContactFormProps = {
-  submitLabel: string;
-  submittingLabel: string;
-  successMessage: string;
-};
-
-type FormStatus = "idle" | "submitting" | "success";
+import type { ContactFormProps, FormStatus } from "./ContactForm.types";
 
 export function ContactForm({
   submitLabel,

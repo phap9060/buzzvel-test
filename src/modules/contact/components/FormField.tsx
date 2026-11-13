@@ -1,18 +1,6 @@
 import type { ChangeEvent } from "react";
 import { cn } from "@/shared/lib/cn";
-
-type FormFieldProps = {
-  id: string;
-  name: string;
-  label: string;
-  value: string;
-  placeholder: string;
-  error?: string;
-  onChange: (value: string) => void;
-  type?: "text" | "email";
-  autoComplete?: string;
-  multiline?: boolean;
-};
+import type { FormFieldProps } from "./FormField.types";
 
 const controlClasses =
   "block w-full scroll-mt-28 rounded-lg border bg-cream px-4 py-2.75 text-body text-ink placeholder:text-ink-tertiary transition-colors duration-200 focus:border-brand";

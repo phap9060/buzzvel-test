@@ -3,13 +3,7 @@
 import Image from "next/image";
 import { useEffect, useId, useRef, useState } from "react";
 import { Button } from "@/shared/ui";
-import type { NavLink } from "../types";
-
-type MobileMenuProps = {
-  links: readonly NavLink[];
-  login: NavLink;
-  signup: NavLink;
-};
+import type { MobileMenuProps } from "./MobileMenu.types";
 
 const DESKTOP_QUERY = "(min-width: 48rem)";
 

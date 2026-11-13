@@ -1,13 +1,5 @@
-import type { ReactNode } from "react";
 import { cn } from "@/shared/lib/cn";
-
-type EyebrowTone = "brand" | "inverse";
-
-type EyebrowProps = {
-  children: ReactNode;
-  tone?: EyebrowTone;
-  className?: string;
-};
+import type { EyebrowProps, EyebrowTone } from "./Eyebrow.types";
 
 const toneClasses: Record<EyebrowTone, string> = {
   brand: "text-brand",

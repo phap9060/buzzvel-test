@@ -1,10 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/shared/lib/cn";
-
-type ArrowIconProps = {
-  tone?: "dark" | "light";
-  className?: string;
-};
+import type { ArrowIconProps } from "./ArrowIcon.types";
 
 const sources = {
   dark: "/icons/arrow-right.svg",
