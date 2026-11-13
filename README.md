@@ -4,7 +4,8 @@
 
 ## Português
 
-Uma landing page responsiva para a "Luma", uma plataforma de ensino fictícia, construída a partir do arquivo Figma fornecido com **Next.js (App Router)**, **TypeScript** e **Tailwind CSS**.
+Uma landing page responsiva para a "Luma", uma plataforma de ensino.
+**Next.js (App Router)**, **TypeScript** e **Tailwind CSS**.
 
 ### Como rodar
 
@@ -48,7 +49,7 @@ src/
     lib/, config/      helper de classes, constantes do site
 ```
 
-Regras que segui: módulos nunca importam uns dos outros, apenas de `shared/`; o conteúdo fica no `data.ts` de cada módulo (dados simulados, sem CMS); tudo é Server Component, exceto as duas peças que precisam de estado — o menu mobile e o formulário de contato.
+Regras seguidas: módulos nunca importam uns dos outros, apenas de `shared/`; o conteúdo fica no `data.ts` de cada módulo (dados simulados, sem CMS); tudo é Server Component, exceto as duas peças que precisam de estado — o menu mobile e o formulário de contato.
 
 ### Principais decisões
 
@@ -60,19 +61,28 @@ Regras que segui: módulos nunca importam uns dos outros, apenas de `shared/`; o
 - **Formas do CTA final.** São ancoradas à borda mais próxima ou ao centro para que a composição se mantenha em qualquer largura, e ficam ocultas abaixo de `lg`, como no frame mobile.
 - **Cabeçalho fixo.** O design não define; deixei-o sticky para que a navegação fique acessível numa página longa, com scroll padding para que as âncoras não fiquem escondidas atrás dele.
 
-#### Onde o design estava indefinido ou inconsistente
+#### Diferenças de design entre mobile e web
+
+Os dois frames do Figma não são idênticos em conteúdo. Implementei cada largura exatamente como o seu frame (mobile abaixo de `lg`, desktop a partir de `lg`), sem unificar nada, e registro aqui o que notei. Não sei se estas diferenças são intencionais; se não forem, cada uma se corrige em uma linha de `data.ts`.
+
+| Onde | Mobile (402px) | Desktop (1280px) | Era para ser diferente? |
+| --- | --- | --- | --- |
+| How it works — rótulo dos passos | "Step 01", "Step 02", "Step 03" | "Step 01" nos três passos | Parece um texto não atualizado no desktop |
+| How it works — texto do passo 2 | "…professionals who actually use these skills." | "…professionals who use these skills." | Não está claro qual é a versão final |
+| How it works — ícone do passo 2 | Quadrado em laranja `#ff704d` a 15% de opacidade | Quadrado em pêssego `#ffcb9f` | Cores parecidas, mas valores diferentes |
+| Contact — formulário | Descrição, rótulos, placeholders e botão em português ("Nome completo", "Enviar mensagem"…); o título "Contact us" está em inglês | Tudo em inglês | Parece um frame não traduzido, já que o resto da página está em inglês |
+
+Como isso foi implementado: um componente `ResponsiveText` renderiza os dois textos e o CSS mostra o do breakpoint atual, sem JavaScript e sem salto na hidratação. Os trechos em português levam `lang="pt"` para leitores de tela. As mensagens de erro e de sucesso do formulário, que o design não define, ficam em inglês nas duas larguras.
+
+#### O que o design não define
 
 | No arquivo Figma | O que fiz |
 | --- | --- |
-| No desktop todos os passos dizem "Step 01"; no mobile, 01, 02, 03 | Os números são derivados da ordem da lista (01–03) |
-| O texto do formulário de contato está em inglês no desktop e em português no mobile | Inglês em tudo, como o restante da página |
-| O texto do passo 2 difere ("who use" vs "who actually use these skills") | Usei o texto do desktop |
-| O ícone do passo 2 usa laranjas diferentes nos dois frames | Usei a cor do desktop |
 | Não há estado aberto para o menu mobile | Um painel abaixo do cabeçalho, reutilizando o fundo do cabeçalho e os estilos de botão |
 | Não há estados de hover, foco, erro ou sucesso | Adicionei hovers discretos, um anel de foco visível, erros junto aos campos e uma mensagem de sucesso |
 | O parágrafo de "The people" é lorem ipsum | Mantido como no design |
 | Os destinos da navegação e dos botões não são especificados | Apontam para a seção da página mais próxima do assunto |
-| Três cores de texto medem 4,45:1 contra o fundo | Usei a cor mais escura seguinte da paleta para cumprir WCAG AA (rótulos dos passos, valor de "Response time", "Browse all courses") |
+| Três cores de texto medem 4,45:1 contra o fundo | Único ponto em que me afastei do Figma: usei a cor mais escura seguinte da paleta para cumprir WCAG AA (rótulos dos passos, valor de "Response time", "Browse all courses") |
 
 ### Interações
 
@@ -90,7 +100,7 @@ Regras que segui: módulos nunca importam uns dos outros, apenas de `shared/`; o
 ### Testes
 
 ```bash
-npm test          # roda os 22 testes uma vez
+npm test          # roda os 23 testes uma vez
 npx vitest        # modo watch
 ```
 
@@ -101,7 +111,7 @@ npx vitest        # modo watch
 | Alvo | Testes | Por que este |
 | --- | --- | --- |
 | `contact/lib/validation.ts` | 8 | É a única regra de negócio da página (campos obrigatórios, formato de e-mail, tamanho mínimo). É uma função pura, com várias ramificações e casos de borda (entrada só com espaços, e-mails malformados), fácil de quebrar ao alterar uma regra. |
-| `contact/components/ContactForm.tsx` | 5 | É um dos dois Client Components e o que tem mais estados: ocioso, com erros, enviando, sucesso. Os testes cobrem o que a validação sozinha não garante: o erro aparece associado ao campo (`aria-invalid`, `aria-describedby`), o foco vai para o primeiro campo inválido, o erro some ao editar, o botão fica desabilitado durante o envio e o sucesso é anunciado em `role="status"`. |
+| `contact/components/ContactForm.tsx` | 6 | É um dos dois Client Components e o que tem mais estados: ocioso, com erros, enviando, sucesso. Os testes cobrem o que a validação sozinha não garante: o erro aparece associado ao campo (`aria-invalid`, `aria-describedby`), o foco vai para o primeiro campo inválido, o erro some ao editar, o botão fica desabilitado durante o envio e o sucesso é anunciado em `role="status"`. Um teste confirma que os textos em português do frame mobile estão marcados com `lang="pt"`. |
 | `site-header/components/MobileMenu.tsx` | 5 | É o outro Client Component e a única navegação em telas pequenas: se quebrar, o site fica sem menu no mobile. Os testes cobrem abrir e fechar, `aria-expanded`/`aria-controls`, uso só por teclado, Escape devolvendo o foco ao botão e o fechamento ao escolher um link. |
 | `shared/lib/cn.ts` | 4 | É usado por todos os componentes compartilhados. O `tailwind-merge` não conhece os tokens do tema por padrão; sem a configuração, `text-h1` (tamanho) e `text-ink` (cor) poderiam se anular. Os testes travam essa configuração. |
 
@@ -116,7 +126,7 @@ npx vitest        # modo watch
 
 ### Como foi verificado
 
-- `npm run lint`, `npm run typecheck`, `npm test` (22 testes) e `npm run build` passam.
+- `npm run lint`, `npm run typecheck`, `npm test` (23 testes) e `npm run build` passam.
 - Capturas de tela do Chromium headless em 402px e 1280px foram comparadas com os frames do Figma, seção por seção, incluindo as alturas renderizadas (a poucos pixels dos frames; altura total no desktop de 5703px contra 5691px no Figma).
 - Sem overflow horizontal em 320, 360, 402, 640, 768, 1024, 1280, 1440 e 1920px.
 - Os fluxos do menu e do formulário foram exercitados com uma sessão de navegador automatizada contra o build de produção, sem erros no console.
@@ -201,19 +211,28 @@ Rules I followed: modules never import from each other, only from `shared/`; con
 - **Final CTA shapes.** They are anchored to the nearest edge or to the centre so the composition holds at any width, and hidden below `lg`, as in the mobile frame.
 - **Sticky header.** The design does not say; I made it sticky so navigation stays reachable on a long page, with scroll padding so anchors are not hidden under it.
 
-#### Where the design was unclear or inconsistent
+#### Design differences between mobile and web
+
+The two Figma frames are not identical in content. I implemented each width exactly as its frame (mobile below `lg`, desktop from `lg` up), without unifying anything, and I list here what I noticed. I do not know whether these differences are intentional; if they are not, each one is a one-line fix in `data.ts`.
+
+| Where | Mobile (402px) | Desktop (1280px) | Was it meant to differ? |
+| --- | --- | --- | --- |
+| How it works — step labels | "Step 01", "Step 02", "Step 03" | "Step 01" on all three steps | Looks like text that was not updated on desktop |
+| How it works — step 2 copy | "…professionals who actually use these skills." | "…professionals who use these skills." | Unclear which is the final version |
+| How it works — step 2 icon | Square in orange `#ff704d` at 15% opacity | Square in peach `#ffcb9f` | Similar colours, different values |
+| Contact — form | Description, labels, placeholders and button in Portuguese ("Nome completo", "Enviar mensagem"…); the "Contact us" title is in English | All in English | Looks like an untranslated frame, since the rest of the page is in English |
+
+How this is implemented: a `ResponsiveText` component renders both texts and CSS shows the one for the current breakpoint, with no JavaScript and no hydration jump. The Portuguese strings carry `lang="pt"` for screen readers. The form's error and success messages, which the design does not define, stay in English at both widths.
+
+#### What the design does not define
 
 | In the Figma file | What I did |
 | --- | --- |
-| Desktop steps all read "Step 01"; mobile reads 01, 02, 03 | Numbers are derived from the list order (01–03) |
-| Contact form copy is English on desktop and Portuguese on mobile | English everywhere, like the rest of the page |
-| Step 2 copy differs ("who use" vs "who actually use these skills") | Used the desktop copy |
-| Step 2 mark uses different oranges on the two frames | Used the desktop colour |
 | No open state for the mobile menu | A panel under the header reusing the header surface and button styles |
 | No hover, focus, error or success states | Added restrained hover states, a visible focus ring, inline field errors and a success message |
 | "The people" paragraph is lorem ipsum | Kept as designed |
 | Navigation and button destinations are not specified | They point at the closest matching section of the page |
-| Three text colours measure 4.45:1 against their background | Used the next darker palette colour to meet WCAG AA (step labels, "Response time" value, "Browse all courses") |
+| Three text colours measure 4.45:1 against their background | The only place I departed from Figma: used the next darker palette colour to meet WCAG AA (step labels, "Response time" value, "Browse all courses") |
 
 ### Interactions
 
@@ -231,7 +250,7 @@ Rules I followed: modules never import from each other, only from `shared/`; con
 ### Tests
 
 ```bash
-npm test          # runs the 22 tests once
+npm test          # runs the 23 tests once
 npx vitest        # watch mode
 ```
 
@@ -242,7 +261,7 @@ npx vitest        # watch mode
 | Target | Tests | Why this one |
 | --- | --- | --- |
 | `contact/lib/validation.ts` | 8 | It is the only business rule on the page (required fields, email format, minimum length). It is a pure function with several branches and edge cases (whitespace-only input, malformed emails), easy to break when a rule changes. |
-| `contact/components/ContactForm.tsx` | 5 | It is one of the two Client Components and the one with the most states: idle, with errors, submitting, success. The tests cover what validation alone does not guarantee: the error is tied to its field (`aria-invalid`, `aria-describedby`), focus moves to the first invalid field, the error clears on edit, the button is disabled while submitting, and success is announced through `role="status"`. |
+| `contact/components/ContactForm.tsx` | 6 | It is one of the two Client Components and the one with the most states: idle, with errors, submitting, success. The tests cover what validation alone does not guarantee: the error is tied to its field (`aria-invalid`, `aria-describedby`), focus moves to the first invalid field, the error clears on edit, the button is disabled while submitting, and success is announced through `role="status"`. One test confirms that the Portuguese copy of the mobile frame is marked with `lang="pt"`. |
 | `site-header/components/MobileMenu.tsx` | 5 | It is the other Client Component and the only navigation on small screens: if it breaks, the site has no menu on mobile. The tests cover opening and closing, `aria-expanded`/`aria-controls`, keyboard-only use, Escape returning focus to the button, and closing when a link is chosen. |
 | `shared/lib/cn.ts` | 4 | Every shared component uses it. `tailwind-merge` does not know the theme tokens by default; without the configuration, `text-h1` (size) and `text-ink` (colour) could cancel each other. The tests lock that configuration in. |
 
@@ -257,7 +276,7 @@ npx vitest        # watch mode
 
 ### How it was checked
 
-- `npm run lint`, `npm run typecheck`, `npm test` (22 tests) and `npm run build` all pass.
+- `npm run lint`, `npm run typecheck`, `npm test` (23 tests) and `npm run build` all pass.
 - Screenshots from headless Chromium at 402px and 1280px were compared with the Figma frames, section by section, including rendered section heights (within a few pixels of the frames; total desktop height 5703px against 5691px in Figma).
 - No horizontal overflow at 320, 360, 402, 640, 768, 1024, 1280, 1440 and 1920px.
 - The menu and the form flows were exercised with a scripted browser session against the production build, with no console errors.

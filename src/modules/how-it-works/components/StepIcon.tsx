@@ -19,7 +19,7 @@ export function StepIcon({ variant }: StepIconProps) {
   if (variant === "experience") {
     return (
       <div aria-hidden="true" className="relative size-14">
-        <div className="absolute inset-0 rotate-12 rounded-lg bg-peach" />
+        <div className="absolute inset-0 rotate-12 rounded-lg bg-coral/15 lg:bg-peach" />
         <div className="absolute top-6 left-6 size-7 rounded-full bg-coral" />
       </div>
     );

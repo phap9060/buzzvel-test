@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { Container, Eyebrow, Section } from "@/shared/ui";
+import { Container, Eyebrow, ResponsiveText, Section } from "@/shared/ui";
 import { ContactForm } from "./components/ContactForm";
-import { contactChannels, contactContent } from "./data";
+import { contactChannels, contactContent, contactFormCopy } from "./data";
 
 const HEADING_ID = "contact-heading";
 const FORM_HEADING_ID = "contact-form-heading";
@@ -67,9 +67,10 @@ export function Contact() {
             {form.title}
           </h3>
           <p className="mt-2 mb-6 text-body text-ink-secondary">
-            {form.description}
+            <ResponsiveText text={form.description} />
           </p>
           <ContactForm
+            fields={contactFormCopy}
             submitLabel={form.submitLabel}
             submittingLabel={form.submittingLabel}
             successMessage={form.successMessage}
