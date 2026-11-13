@@ -84,7 +84,7 @@ Rules I followed: modules never import from each other, only from `shared/`; con
 
 ## How it was checked
 
-- `npm run lint`, `npm run typecheck`, `npm test` (8 tests) and `npm run build` all pass.
+- `npm run lint`, `npm run typecheck`, `npm test` (12 tests) and `npm run build` all pass.
 - Screenshots from headless Chromium at 402px and 1280px were compared with the Figma frames, section by section, including rendered section heights (within a few pixels of the frames; total desktop height 5703px against 5691px in Figma).
 - No horizontal overflow at 320, 360, 402, 640, 768, 1024, 1280, 1440 and 1920px.
 - The menu and the form flows were exercised with a scripted browser session against the production build, with no console errors.
@@ -95,7 +95,7 @@ Rules I followed: modules never import from each other, only from `shared/`; con
 - Checked in headless Chromium only. Not tested in Safari or Firefox, on physical devices, or with a screen reader.
 - Text renders slightly wider than in the Figma export (a few pixels per line), so some line widths differ marginally.
 - Form inputs use the design's 14px text, which makes iOS Safari zoom in on focus.
-- No Storybook and no end-to-end tests in the repository; the unit tests cover the form validation only.
+- No Storybook and no end-to-end tests in the repository; the unit tests cover the form validation and the class-name helper only.
 - Open Graph metadata has no image, since there is no deployed URL to resolve it against.
 - All links are in-page anchors and the form submission is mocked.
 

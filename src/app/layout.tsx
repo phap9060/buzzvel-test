@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { siteConfig } from "@/shared/config/site";
+import { cn } from "@/shared/lib/cn";
 import "./globals.css";
 
 const inter = Inter({
@@ -40,7 +41,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
+    <html lang="en" className={cn(inter.variable, jakarta.variable)}>
       <body className="flex min-h-dvh flex-col">{children}</body>
     </html>
   );
