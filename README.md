@@ -20,7 +20,7 @@ npm run dev        # http://localhost:3000
 | `npm run build`     | Production build (the page is fully static) |
 | `npm run start`     | Serves the production build                |
 | `npm run lint`      | ESLint                                     |
-| `npm run typecheck` | TypeScript, no emit                        |
+| `npm run typecheck` | Generates route types, then TypeScript     |
 | `npm test`          | Unit and component tests (Vitest)          |
 
 ## Project structure
